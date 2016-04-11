@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://rawgit.com/aframevr/aframe/master/dist/aframe.js"></script>
+<script src="https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js"></script>
+
+</head>
+
+<body>
+<script>
+var coordinates = AFRAME.utils.coordinates;
+console.log("registering..");
+AFRAME.registerComponent('meshline', {
+  schema: {
+    color: { default: '#000' },
+    path: {
+      default: [
+        { x: -0.5, y: 0, z: 0 },
+        { x: 0.5, y: 0, z: 0 }
+      ],
+
+      // Deserialize path in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
+      parse: function (value) {
+        return value.split(',').map(coordinates.parse);
+      },
+
+      // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
+      stringify: function (data) {
+        return data.map(coordinates.stringify).join(',');
+      }
+    }
+  },
+  
+  update: function () {
+    console.log("updating ..");
+    var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight);
+    var material = new THREE.MeshLineMaterial({
+      color: this.data.color,
+      resolution: resolution,
+      lineWidth: 10
+    });
+    console.log("material:");
+    //console.log(THREE.MeshLineMaterial);
+    console.log(material);
+    var geometry = new THREE.Geometry();
+    
+    this.data.path.forEach(function (vec3) {
+      geometry.vertices.push(
+        new THREE.Vector3(vec3.x, vec3.y, vec3.z)
+      );
+    });
+    var  line = new THREE.MeshLine();
+    console.log("line:");
+    
+    line.setGeometry( geometry );
+    
+    
+
+    this.el.setObject3D('mesh', new THREE.MeshLine(line.geometry, material));
+  },
+  
+  remove: function () {
+    this.el.removeObject3D('mesh');
+  }
+});
+</script> 
+
+<!--
+<a-scene> 
+  <a-assets>
+    <a-mixin id="red" meshline="color: #E20049"></a-mixin>
+  </a-assets>
+  
+  <a-entity geometry="primitive: circle; radius: 10; segments: 64" material="color: #F79F24" position="0 0 -12"></a-entity>
+  
+  <a-entity id="happy" position="0 2 -10">
+    <a-entity mixin="red" meshline="path: -1 1 0, -1 0.5 0, -1 0 0"></a-entity>
+    <a-entity mixin="red" meshline="path: 1 1 0, 1 0.5 0, 1 0 0"></a-entity>
+    <a-entity mixin="red" meshline="path: -2 -1 0, 0 -2 0, 2 -1"></a-entity> 
+  </a-entity>                                                            
+  <a-sky color="#FFEED0"></a-sky>
+</a-scene>
+-->
+<div id="container" ></div>
+<script>
+
+var container = document.getElementById( 'container' );
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, .1, 1000 );
+camera.position.set( 50, 10, 0 );
+
+var renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true });
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio( window.devicePixelRatio );
+container.appendChild( renderer.domElement );
+
+var resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
+var graph = new THREE.Object3D();
+scene.add( graph );
+
+init();
+render();
+
+function init() {
+
+  var g = new THREE.MeshLine();
+  var geometry = new THREE.Geometry();
+  for( var j = 0; j < Math.PI; j += 2 * Math.PI / 100 ) {
+    var v = new THREE.Vector3( Math.cos( j ), Math.sin( j ), 0 );
+    geometry.vertices.push( v );
+  }
+  
+	g.setGeometry( geometry );
+
+	var material = new THREE.MeshLineMaterial( { 
+		useMap: false,
+		color: new THREE.Color( 0x222244 ),
+		opacity: 1,
+		resolution: resolution,
+		sizeAttenuation: false,
+		lineWidth: 10,
+		near: camera.near,
+		far: camera.far
+	});
+	var mesh = new THREE.Mesh( g.geometry, material );
+	graph.add( mesh );
+
+}
+
+
+function render() {
+
+	//requestAnimationFrame( render );
+	//controls.update();
+	//graph.rotation.y += .25 * clock.getDelta();
+
+	renderer.render( scene, camera );
+
+}
+
+</script>
+
+</body>
+</html>
