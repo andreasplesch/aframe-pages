@@ -36,7 +36,7 @@ AFRAME.registerComponent('meshline', {
     console.log("updating ..");
     var material = new THREE.MeshLineMaterial({
 	      color: this.data.color,
-      resolution: new THREE.Vector2 ( 100, 100),
+      resolution: new THREE.Vector2 ( window.innerWidth, window.innerHeight),
       lineWidth: 10
     
     });
