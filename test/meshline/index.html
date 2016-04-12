@@ -39,7 +39,9 @@ AFRAME.registerComponent('meshline', {
       color: this.data.color,
       resolution: resolution,
       sizeAttenuation: false,
-      lineWidth: 10
+      lineWidth: 1,
+      near: 0.1,
+      far: 1000
     });
     console.log("material:");
     //console.log(THREE.MeshLineMaterial);
