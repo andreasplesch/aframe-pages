@@ -99,7 +99,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 container.appendChild( renderer.domElement );
-
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
 var resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
 var graph = new THREE.Object3D();
 scene.add( graph );
@@ -137,7 +137,7 @@ function init() {
 function render() {
 
 	//requestAnimationFrame( render );
-	//controls.update();
+	controls.update();
 	//graph.rotation.y += .25 * clock.getDelta();
 
 	renderer.render( scene, camera );
