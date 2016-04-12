@@ -11,7 +11,7 @@
 
 
 <script>
-function register_late () {
+//function register_late () {
 var coordinates = AFRAME.utils.coordinates;
 //console.log("registering..");
 AFRAME.registerComponent('meshline', {
@@ -73,13 +73,13 @@ AFRAME.registerComponent('meshline', {
 //this.reload();
 //this.render();
 
-};
+//};
 
 //scene.addEventListener('loaded', register_late);
-register_late();
+//register_late();
 </script> 
 
-<a-scene id='theScene' onloaded='myInit()'> 
+<a-scene> 
   <a-assets>
     <a-mixin id="red" meshline="lineWidth: 30; color: #E20049"></a-mixin>
   </a-assets>
@@ -94,11 +94,15 @@ register_late();
   <a-sky color="#FFEED0"></a-sky>
 </a-scene>
 
-</body>
 <script>
+var scene = document.querySelector('a-scene');
+
 var myInit = function () {
   var scene = document.getElementById('theScene');
 };
 </script>
+
+
+</body>
 
 </html>
