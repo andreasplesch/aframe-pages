@@ -10,7 +10,7 @@
 <body>
 <script>
 var coordinates = AFRAME.utils.coordinates;
-console.log("registering..");
+//console.log("registering..");
 AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
@@ -39,13 +39,13 @@ AFRAME.registerComponent('meshline', {
       color: this.data.color,
       resolution: resolution,
       sizeAttenuation: false,
-      lineWidth: 1,
+      lineWidth: 10,
       near: 0.1,
       far: 1000
     });
-    console.log("material:");
+    //console.log("material:");
     //console.log(THREE.MeshLineMaterial);
-    console.log(material);
+    //console.log(material);
     var geometry = new THREE.Geometry();
     
     this.data.path.forEach(function (vec3) {
@@ -54,13 +54,9 @@ AFRAME.registerComponent('meshline', {
       );
     });
     var  line = new THREE.MeshLine();
-    console.log("line:");
-    
     line.setGeometry( geometry );
-    
-    
 
-    this.el.setObject3D('mesh', new THREE.MeshLine(line.geometry, material));
+    this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
   },
   
   remove: function () {
