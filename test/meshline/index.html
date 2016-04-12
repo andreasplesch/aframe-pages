@@ -83,15 +83,15 @@ AFRAME.registerComponent('meshline', {
 });
 
 //reload scene to update existing DOM elements
-this.removeEventListener('loaded', register_late);
-this.reload();
-this.render();
+//this.removeEventListener('loaded', register_late);
+//this.reload();
+//this.render();
 
 };
 
 var scene = document.querySelector('a-scene');
-scene.addEventListener('loaded', register_late);
-
+//scene.addEventListener('loaded', register_late);
+register_late();
 </script> 
 
 
