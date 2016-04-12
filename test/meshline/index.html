@@ -79,7 +79,7 @@ AFRAME.registerComponent('meshline', {
 register_late();
 </script> 
 
-<a-scene> 
+<a-scene id='theScene'> 
   <a-assets>
     <a-mixin id="red" meshline="lineWidth: 30; color: #E20049"></a-mixin>
   </a-assets>
@@ -97,7 +97,7 @@ register_late();
 </body>
 <script>
 window.onload = function () {
-  var scene = document.querySelector('a-scene');
+  var scene = document.getElementById('theScene');
 };
 </script>
 
