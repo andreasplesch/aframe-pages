@@ -9,6 +9,7 @@
 
 <body>
 <script>
+function register_late () {
 var coordinates = AFRAME.utils.coordinates;
 //console.log("registering..");
 AFRAME.registerComponent('meshline', {
@@ -64,6 +65,8 @@ AFRAME.registerComponent('meshline', {
     this.el.removeObject3D('mesh');
   }
 });
+};
+register_late();
 </script> 
 
 <a-scene> 
