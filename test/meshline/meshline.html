@@ -120,14 +120,14 @@ function init() {
 	g.setGeometry( geometry );
 
 	var material = new THREE.MeshLineMaterial( { 
-		useMap: false,
+		//useMap: false,
 		color: new THREE.Color( 0x222244 ),
-		opacity: 1,
+		//opacity: 1,
 		resolution: resolution,
-		sizeAttenuation: false,
+		//sizeAttenuation: false,
 		lineWidth: 10,
-		near: camera.near,
-		far: camera.far
+		//near: camera.near,
+		//far: camera.far
 	});
 	var mesh = new THREE.Mesh( g.geometry, material );
 	graph.add( mesh );
