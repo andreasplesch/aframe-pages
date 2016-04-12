@@ -14,6 +14,7 @@ var coordinates = AFRAME.utils.coordinates;
 AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
+    lineWidth: { default: 10 },
     path: {
       default: [
         { x: -0.5, y: 0, z: 0 },
@@ -39,7 +40,7 @@ AFRAME.registerComponent('meshline', {
       color: new THREE.Color(this.data.color),
       resolution: resolution,
       sizeAttenuation: false,
-      lineWidth: 20,
+      lineWidth: this.data.lineWidth,
       near: 0.1,
       far: 1000
     });
@@ -75,7 +76,7 @@ AFRAME.registerComponent('meshline', {
   <a-entity id="happy" position="0 2 -10">
     <a-entity mixin="red" meshline="path: -1 1 0, -1 0.5 0, -1 0 0"></a-entity>
     <a-entity mixin="red" meshline="path: 1 1 0, 1 0.5 0, 1 0 0"></a-entity>
-    <a-entity mixin="red" meshline="path: -2 -1 0, 0 -2 0, 2 -1"></a-entity> 
+    <a-entity mixin="red" meshline="lineWidth: 5; path: -2 -1 0, 0 -2 0, 2 -1"></a-entity> 
   </a-entity>                                                            
   <a-sky color="#FFEED0"></a-sky>
 </a-scene>
