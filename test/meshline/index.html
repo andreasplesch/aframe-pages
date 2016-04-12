@@ -36,10 +36,10 @@ AFRAME.registerComponent('meshline', {
     console.log("updating ..");
     var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight);
     var material = new THREE.MeshLineMaterial({
-      color: this.data.color,
+      color: new THREE.Color(this.data.color),
       resolution: resolution,
       sizeAttenuation: false,
-      lineWidth: 10,
+      lineWidth: 20,
       near: 0.1,
       far: 1000
     });
