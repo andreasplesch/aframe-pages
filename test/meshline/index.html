@@ -66,7 +66,8 @@ AFRAME.registerComponent('meshline', {
   }
 });
 };
-register_late();
+
+document.querySelector("a-scene").addEventListener("loaded", register_late);
 </script> 
 
 <a-scene> 
