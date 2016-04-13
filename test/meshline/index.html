@@ -11,17 +11,11 @@
 
 
 <script>
-//var myaframe = AFRAME;
-//var scene = document.querySelector('a-scene');
-//scene.addEventListener('render-target-loaded', register_late);
-
-
 function register_late_and_update () {
 var coordinates = AFRAME.utils.coordinates;
 var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight );
 
 //console.log("registering..");
-
 AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
@@ -47,7 +41,7 @@ AFRAME.registerComponent('meshline', {
   update: function () {
     console.log("updating ..");
     var canvas = this.el.sceneEl.canvas;
-    //resolution = new THREE.Vector2 ( canvas.width, canvas.height );
+    resolution = new THREE.Vector2 ( canvas.width, canvas.height );
     console.log("resolution");
     
     var material = new THREE.MeshLineMaterial({
@@ -88,15 +82,7 @@ var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool sel
   
 });
 
-
-//reload scene to update existing DOM elements
-//this.removeEventListener('loaded', register_late);
-//this.reload();
-//this.render();
-
 };
-
-//register_late();
 </script> 
 
 <a-scene> 
@@ -115,13 +101,9 @@ var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool sel
 </a-scene>
 
 <script>
-
 var scene = document.querySelector('a-scene');
 scene.addEventListener('loaded', register_late_and_update);
-
 </script>
 
-
 </body>
-
 </html>
