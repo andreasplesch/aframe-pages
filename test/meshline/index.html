@@ -110,7 +110,7 @@ var scene = document.querySelector('a-scene');
 scene.addEventListener('render-target-loaded', register_late);
 //need to update all entities with newly registered component
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
-[...all_meshlines].map(function(entity){entity.updateComponents();}); // updateComponents does it
+[...all_meshlines].forEach(function(entity){entity.updateComponents();}); // updateComponents does it
 
 </script>
 
