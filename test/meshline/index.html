@@ -79,6 +79,16 @@ AFRAME.registerComponent('meshline', {
   }
 });
 
+//need to update all entities with newly registered component
+var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
+[...all_meshlines].forEach(function(entity){
+  
+  var proto = Object.getPrototypeOf(entity);
+  console.log(proto); //.updateComponents(); // updateComponents does it
+
+});
+
+
 //reload scene to update existing DOM elements
 //this.removeEventListener('loaded', register_late);
 //this.reload();
