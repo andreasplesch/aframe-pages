@@ -16,7 +16,7 @@
 //scene.addEventListener('render-target-loaded', register_late);
 
 
-function register_late () {
+function register_late_and_update () {
 var coordinates = AFRAME.utils.coordinates;
 var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight );
 
@@ -85,7 +85,8 @@ var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool sel
   
   var proto = Object.getPrototypeOf(entity);
   console.log(proto); //.updateComponents(); // updateComponents does it
-
+  entity.updateComponents();
+  
 });
 
 
@@ -117,7 +118,7 @@ var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool sel
 <script>
 
 var scene = document.querySelector('a-scene');
-scene.addEventListener('loaded', register_late);
+scene.addEventListener('loaded', register_late_and_update);
 //need to update all entities with newly registered component
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
 [...all_meshlines].forEach(function(entity){
