@@ -11,18 +11,18 @@
 
 
 <script>
-var myaframe = AFRAME;
+//var myaframe = AFRAME;
 //var scene = document.querySelector('a-scene');
 //scene.addEventListener('render-target-loaded', register_late);
 
 
 function register_late () {
-var coordinates = myaframe.utils.coordinates;
+var coordinates = AFRAME.utils.coordinates;
 var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight );
 
 //console.log("registering..");
 
-myaframe.registerComponent('meshline', {
+AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
     lineWidth: { default: 10 },
