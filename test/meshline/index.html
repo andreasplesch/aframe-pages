@@ -105,9 +105,12 @@ AFRAME.registerComponent('meshline', {
 </a-scene>
 
 <script>
+
 var scene = document.querySelector('a-scene');
 scene.addEventListener('render-target-loaded', register_late);
-
+//need to update all entities with newly registered component
+var all_meshlines = document.querySelector('a-entity[meshline]'); // cool selector
+[...all_meshlines].map(function(entity){entity.updateComponents();}); // updateComponents does it
 
 </script>
 
