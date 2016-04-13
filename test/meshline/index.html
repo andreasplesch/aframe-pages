@@ -106,10 +106,9 @@ AFRAME.registerComponent('meshline', {
 
 <script>
 var scene = document.querySelector('a-scene');
+scene.addEventListener('render-target-loaded', register_late);
 
-var myInit = function () {
-  var scene = document.getElementById('theScene');
-};
+
 </script>
 
 
