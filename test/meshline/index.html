@@ -112,7 +112,8 @@ scene.addEventListener('render-target-loaded', register_late);
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
 [...all_meshlines].forEach(function(entity){
   
-  console.log(entity.components); //.updateComponents(); // updateComponents does it
+  var proto = Object.getProtoTypeOf(entity);
+  console.log(proto); //.updateComponents(); // updateComponents does it
 
 });
 </script>
