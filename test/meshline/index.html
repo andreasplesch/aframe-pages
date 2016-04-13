@@ -11,6 +11,10 @@
 
 
 <script>
+var myaframe = AFRAME;
+var scene = document.querySelector('a-scene');
+scene.addEventListener('render-target-loaded', register_late);
+
 function register_late () {
 var coordinates = myaframe.utils.coordinates;
 var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight );
@@ -80,9 +84,6 @@ myaframe.registerComponent('meshline', {
 
 };
 
-var myaframe = AFRAME;
-var scene = document.querySelector('a-scene');
-scene.addEventListener('render-target-loaded', register_late);
 //register_late();
 </script> 
 
