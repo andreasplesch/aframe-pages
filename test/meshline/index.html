@@ -83,8 +83,7 @@ AFRAME.registerComponent('meshline', {
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
 [...all_meshlines].forEach(function(entity){
   
-  var proto = Object.getPrototypeOf(entity);
-  console.log(entity.components); //.updateComponents(); // updateComponents does it
+  //console.log(entity.components); //.updateComponents(); // updateComponents does it
   entity.updateComponents();
   
 });
@@ -119,14 +118,7 @@ var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool sel
 
 var scene = document.querySelector('a-scene');
 scene.addEventListener('loaded', register_late_and_update);
-//need to update all entities with newly registered component
-var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
-[...all_meshlines].forEach(function(entity){
-  
-  var proto = Object.getPrototypeOf(entity);
-  console.log(proto); //.updateComponents(); // updateComponents does it
 
-});
 </script>
 
 
