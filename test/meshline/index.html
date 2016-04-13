@@ -107,7 +107,7 @@ AFRAME.registerComponent('meshline', {
 <script>
 
 var scene = document.querySelector('a-scene');
-scene.addEventListener('render-target-loaded', register_late);
+scene.addEventListener('loaded', register_late);
 //need to update all entities with newly registered component
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
 [...all_meshlines].forEach(function(entity){
