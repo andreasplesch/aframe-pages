@@ -15,13 +15,13 @@ var myaframe = AFRAME;
 var scene = document.querySelector('a-scene');
 scene.addEventListener('render-target-loaded', register_late);
 
-
+/*
 function register_late () {
 //var coordinates = myaframe.utils.coordinates;
 var resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight );
 
 //console.log("registering..");
-/*
+
 myaframe.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
@@ -78,14 +78,14 @@ myaframe.registerComponent('meshline', {
     this.el.removeObject3D('mesh');
   }
 });
-*/
+
 //reload scene to update existing DOM elements
 //this.removeEventListener('loaded', register_late);
 //this.reload();
 //this.render();
 
 };
-
+*/
 //register_late();
 </script> 
 
