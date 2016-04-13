@@ -112,7 +112,7 @@ scene.addEventListener('render-target-loaded', register_late);
 var all_meshlines = document.querySelectorAll('a-entity[meshline]'); // cool selector
 [...all_meshlines].forEach(function(entity){
   
-  console.log(Object.entries(entity)); //.updateComponents(); // updateComponents does it
+  console.log(Object.getOwnPropertyNames(entity)); //.updateComponents(); // updateComponents does it
 
 });
 </script>
