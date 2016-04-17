@@ -9,11 +9,21 @@
   </head>
   <body>
     <a-scene>
-      <html-include src='helloworld_aframe.html'></html-include>
+      
+      <html-include
+        src='helloworld_aframe.html'>
+      </html-include>
+      
       <a-entity position='5 0 0'>
-        <a-animation attribute='rotation' dur='20000' to='0 360 0' easing='linear' repeat='indefinite'>
+        
+        <html-include 
+          src='helloworld_aframe.html'>
+        </html-include>
+        
+        <a-animation 
+          attribute='rotation' dur='20000' to='0 360 0' easing='linear' repeat='indefinite'>
         </a-animation>
-        <html-include src='helloworld_aframe.html'></html-include>
+        
       </a-entity>
     </a-scene>
   </body>
