@@ -12,6 +12,12 @@
       <html-include src='helloworld_aframe.html'></html-include>
       <a-entity position='5 0 0'>
         <html-include src='helloworld_aframe.html'></html-include>
+        <a-animate attribute='rotation'
+          dur="10000"
+          fill="forwards"
+          to="0 360 0"
+          repeat="indefinite">
+        </a-animation>
       </a-entity>
     </a-scene>
   </body>
