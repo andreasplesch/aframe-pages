@@ -12,7 +12,9 @@
   <body>
     <a-scene>
       <a-assets>
-        <a-identity id='helloworld' template='src:helloworld_aframe.html'></a-identity>
+        <script id="helloworld" type="text/x-nunjucks-template">
+          <a-identity template='src:helloworld_aframe.html'></a-identity>
+        </script>
       </a-assets>
       
       <a-entity camera wasd-controls look-controls position='2.5 2 5'></a-entity>
