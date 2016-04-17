@@ -6,13 +6,12 @@
     <meta name="description" content="Hello, World! • A-Frame">
     <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-template-component/master/dist/aframe-template-component.min.js"></script>
-    <!--script src="https://rawgit.com/chris-l/html-include/master/dist/html-include.min.js">
     </script-->
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <script id="helloworld" type="text/x-nunjucks-template">
+        <script id="helloworld" type="text/x-nunjucks-template;  type: handlebars">
           <a-entity template='src:helloworld_aframe.html'></a-entity>
         </script>
       </a-assets>
