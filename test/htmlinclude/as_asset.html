@@ -6,30 +6,27 @@
     <meta name="description" content="Hello, World! • A-Frame">
     <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-template-component/master/dist/aframe-template-component.min.js"></script>
-    <!--script src="https://rawgit.com/chris-l/html-include/master/dist/html-include.min.js"></script-->
+    <!--script src="https://rawgit.com/chris-l/html-include/master/dist/html-include.min.js">
+    </script-->
   </head>
   <body>
     <a-scene>
       <a-assets>
-      
+        <a-identity id='helloworld' template='src:helloworld_aframe.html'></a-identity>
       </a-assets>
+      
       <a-entity camera wasd-controls look-controls position='2.5 2 5'></a-entity>
-      <html-include
-        src='helloworld_aframe.html'>
-      </html-include>
+      
+      <a-entity template='src:#helloworld'></a-entity>
       
       <a-entity position='5 0 0'>
-        
-        
         <a-animation 
           attribute='rotation' dur='20000' to='0 360 0' easing='linear' repeat='indefinite'>
         </a-animation>
         
         <a-entity>
           
-          <html-include 
-            src='helloworld_aframe.html'>
-          </html-include>
+          <a-entity template='src:#helloworld'></a-entity>
         
           <a-animation 
             attribute='rotation' dur='20000' from='-20 0 0' to='20 0 0' direction='alternate' easing='linear' repeat='indefinite'>
