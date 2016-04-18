@@ -9,11 +9,14 @@
     </script-->
   </head>
   <body>
+    <a-assets>
+      <a-mixin id='helloworld' template='src:helloworld_aframe.html'></a-mixin>
+    </a-assets>
     <a-scene>
       
       <a-entity camera wasd-controls look-controls position='2.5 2 5'></a-entity>
       
-      <a-entity template='src:helloworld_aframe.html'></a-entity>
+      <a-entity mixin='#helloworld'></a-entity>
 
       <a-entity position='5 0 0'>
         <a-animation 
@@ -22,7 +25,7 @@
         
         <a-entity>
           
-          <a-entity template='src:helloworld_aframe.html'></a-entity>
+          <a-entity mixin='#helloworld'></a-entity>
         
           <a-animation 
             attribute='rotation' dur='20000' from='-20 0 0' to='20 0 0' direction='alternate' easing='linear' repeat='indefinite'>
