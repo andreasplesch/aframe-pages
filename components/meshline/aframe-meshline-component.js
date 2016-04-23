@@ -2,7 +2,7 @@ AFRAME.registerComponent('meshline', {
   schema: {
     color: { default: '#000' },
     lineWidth: { default: 10 },
-    lineWidthStyler: { default: "1" },
+    lineWidthStyler: { default: '1' },
     path: {
       default: [
         { x: -0.5, y: 0, z: 0 },
