@@ -20,8 +20,9 @@
   // and set rotation/matrix accordingly.
   </script>
     <a-scene>
-    
-      <a-entity camera wasd-controls look-controls position='2.5 2 20000000' far='30000000' near='3000'></a-entity>
+      <a-entity position='2.5 2 20000000' >
+        <a-entity camera wasd-controls look-controls far='30000000' near='3000'></a-entity>
+      </a-entity>
       
       <a-entity geometry='primitive: sphere; radius: 6300000' material='color: blue'></a-entity>
       
