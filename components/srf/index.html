@@ -10,13 +10,14 @@
   <body>
   <script>
   //srf component
-  
+  //if object3d.geometry : project to geocentric
+  //if position: 
   </script>
     <a-scene>
     
       <a-entity camera wasd-controls look-controls position='2.5 2 5'></a-entity>
       
-      <a-entity geometry='type: box' srf='epsg: 3587; UpToY: true'></a-entity>
+      <a-entity geometry='type: box' srf='epsg: 3587, center: -117 40 0, UpToY: true'></a-entity>
       
     </a-scene>
   </body>
