@@ -52,13 +52,13 @@
   do_update: function () {
   
     //entity completely loaded
-    var object3D = this.el.object3D;
+    var o3Ds = this.el.object3D.object3DMap;
     //iterate over map to find geometries
     //primitves probably have BufferGeometry
     
-    this._geoGeometry = object3D.Mesh.Geometry.clone();
+    this._geoGeometry = o3Ds.Mesh.Geometry.clone();
     var geom = new THREE.Geometry();
-    geom = geom.fromBufferGeometry(object3D.Mesh.BufferGeometry);
+    geom = geom.fromBufferGeometry(o3Ds.Mesh.BufferGeometry);
     //var canvas = this.el.sceneEl.canvas;
     //this.resolution.set( canvas.width,  canvas.height );
     //console.log( this.resolution );
