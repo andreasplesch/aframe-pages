@@ -18,6 +18,89 @@
   // or ..
   // instead of separate components, type: geoposition|geotransform|geocoord, geocenter: long lat elev
   // and set rotation/matrix accordingly.
+  AFRAME.registerComponent('srf', {
+  schema: {
+    type: { default: 'geocoord' },
+    geocenter: { default: 0 0 0 },
+    epsg: { default: 3857 }
+    }
+  },
+  
+  init: function () {
+    this.resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight ) ;
+    //this.resolution = new THREE.Vector2 (1, 21) ;
+    
+    var sceneEl = this.el.sceneEl;
+    sceneEl.addEventListener( 'render-target-loaded', this.do_update.bind(this) );
+    sceneEl.addEventListener( 'render-target-loaded', this.addlisteners.bind(this) );
+  
+    
+  /*
+    if (sceneEl.hasLoaded) {
+  
+      console.log('has loaded');
+      this.do_update(); //never happens ?
+  
+    } else {
+  
+      sceneEl.addEventListener('render-target-loaded', this.do_update.bind(this));
+  
+      }
+  */
+  },
+  
+  addlisteners: function () {
+  
+    var canvas = this.el.sceneEl.canvas;
+  
+    // canvas does not fire resize events, need window
+    window.addEventListener( 'resize', this.do_update.bind (this) );
+    
+    //console.log( canvas );
+    //this.do_update() ;
+  
+  },
+  
+  do_update: function () {
+  
+    var canvas = this.el.sceneEl.canvas;
+    this.resolution.set( canvas.width,  canvas.height );
+    console.log( this.resolution );
+    this.update();
+
+  },
+  
+  update: function () {
+    //cannot use canvas here because it is not created yet at init time
+    console.log("canvas res:");
+    console.log(this.resolution);
+    var material = new THREE.MeshLineMaterial({
+      color: new THREE.Color(this.data.color),
+      resolution: this.resolution,
+      sizeAttenuation: false,
+      lineWidth: this.data.lineWidth,
+      //near: 0.1,
+      //far: 1000
+    });
+  
+    var geometry = new THREE.Geometry();
+    
+    this.data.path.forEach(function (vec3) {
+      geometry.vertices.push(
+        new THREE.Vector3(vec3.x, vec3.y, vec3.z)
+      );
+    });
+    var  line = new THREE.MeshLine();
+    var  widthFn = new Function ('p', 'return ' + this.data.lineWidthStyler);
+    line.setGeometry( geometry, widthFn );
+    this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
+  },
+  
+  remove: function () {
+    this.el.removeObject3D('mesh');
+  }
+});
+
   </script>
     <a-scene>
       <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-1 1 0"></a-entity>
