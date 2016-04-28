@@ -27,34 +27,22 @@
   },
   
   init: function () {
-    this.resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight ) ;
+    //this.resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight ) ;
     //this.resolution = new THREE.Vector2 (1, 21) ;
     
-    var sceneEl = this.el.sceneEl;
-    sceneEl.addEventListener( 'render-target-loaded', this.do_update.bind(this) );
-    sceneEl.addEventListener( 'render-target-loaded', this.addlisteners.bind(this) );
-  
+    var el = this.el;
+    el.addEventListener( 'loaded', this.do_update.bind(this) );
+    //sceneEl.addEventListener( 'render-target-loaded', this.addlisteners.bind(this) );
+    this._geoGeometry = {};
     
-  /*
-    if (sceneEl.hasLoaded) {
-  
-      console.log('has loaded');
-      this.do_update(); //never happens ?
-  
-    } else {
-  
-      sceneEl.addEventListener('render-target-loaded', this.do_update.bind(this));
-  
-      }
-  */
   },
   
   addlisteners: function () {
   
-    var canvas = this.el.sceneEl.canvas;
+    //var canvas = this.el.sceneEl.canvas;
   
     // canvas does not fire resize events, need window
-    window.addEventListener( 'resize', this.do_update.bind (this) );
+    //window.addEventListener( 'resize', this.do_update.bind (this) );
     
     //console.log( canvas );
     //this.do_update() ;
@@ -63,6 +51,12 @@
   
   do_update: function () {
   
+    //entity completely loaded
+    var object3D = this.el.object3D;
+    //iterate over map to find geometries
+    //primitves probably have BufferGeometry
+    
+    this._geoGeometry = object3D.Mesh.Geometry.clone();
     var canvas = this.el.sceneEl.canvas;
     this.resolution.set( canvas.width,  canvas.height );
     console.log( this.resolution );
