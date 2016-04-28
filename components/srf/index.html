@@ -21,7 +21,7 @@
   AFRAME.registerComponent('srf', {
   schema: {
     type: { default: 'geocoord' },
-    geocenter: { default: 0 0 0 },
+    geocenter: { type: 'vec3' },
     epsg: { default: 3857 }
     }
   },
@@ -57,15 +57,18 @@
     //primitves probably have BufferGeometry
     
     this._geoGeometry = object3D.Mesh.Geometry.clone();
-    var canvas = this.el.sceneEl.canvas;
-    this.resolution.set( canvas.width,  canvas.height );
-    console.log( this.resolution );
-    this.update();
+    var geom = new THREE.Geometry();
+    geom = geom.fromBufferGeometry(object3D.Mesh.BufferGeometry);
+    //var canvas = this.el.sceneEl.canvas;
+    //this.resolution.set( canvas.width,  canvas.height );
+    //console.log( this.resolution );
+    //this.update();
 
   },
   
   update: function () {
     //cannot use canvas here because it is not created yet at init time
+    /*
     console.log("canvas res:");
     console.log(this.resolution);
     var material = new THREE.MeshLineMaterial({
@@ -75,6 +78,7 @@
       lineWidth: this.data.lineWidth,
       //near: 0.1,
       //far: 1000
+      
     });
   
     var geometry = new THREE.Geometry();
@@ -88,6 +92,7 @@
     var  widthFn = new Function ('p', 'return ' + this.data.lineWidthStyler);
     line.setGeometry( geometry, widthFn );
     this.el.setObject3D('mesh', new THREE.Mesh(line.geometry, material));
+    */
   },
   
   remove: function () {
