@@ -56,9 +56,9 @@
     //iterate over map to find geometries
     //primitves probably have BufferGeometry
     
-    this._geoGeometry = o3Ds.Mesh.Geometry.clone();
+    this._geoGeometry = o3Ds.mesh.geometry.clone();
     var geom = new THREE.Geometry();
-    geom = geom.fromBufferGeometry(o3Ds.Mesh.BufferGeometry);
+    geom = geom.fromBufferGeometry(o3Ds.mesh.BufferGeometry);
     //var canvas = this.el.sceneEl.canvas;
     //this.resolution.set( canvas.width,  canvas.height );
     //console.log( this.resolution );
