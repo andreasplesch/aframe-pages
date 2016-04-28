@@ -18,13 +18,13 @@
   // or ..
   // instead of separate components, type: geoposition|geotransform|geocoord, geocenter: long lat elev
   // and set rotation/matrix accordingly.
-  AFRAME.registerComponent('srf', 
+  AFRAME.registerComponent('srf', {
   schema: {
     type: { default: 'geocoord' },
     geocenter: { type: 'vec3' },
     epsg: { default: 3857 }
     }
-  },
+  ,
   
   init: function () {
     //this.resolution = new THREE.Vector2 ( window.innerWidth, window.innerHeight ) ;
