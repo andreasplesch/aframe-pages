@@ -93,7 +93,7 @@
                 slat2 = slat*slat;
                 clat = Math.cos(source_lat);
                 Rn = A / Math.sqrt(1.0 - Eps2 * slat2);
-                RnPh = Rn + coords[i].z;
+                RnPh = Rn + vertex.z;
 
                     current.x = RnPh * clat * Math.cos(source_lon);
                     current.y = RnPh * clat * Math.sin(source_lon);
