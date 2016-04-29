@@ -56,14 +56,33 @@
     //iterate over map to find geometries
     //primitves probably have BufferGeometry
     
-    this._geoGeometry = o3Ds.mesh.geometry.clone();
-    var geom = new THREE.Geometry();
+    var g = o3Ds.mesh.geometry;
+    this._geoGeometry = g.clone();
+    //var geom = new THREE.Geometry();
     //geom = geom.fromBufferGeometry(o3Ds.mesh.BufferGeometry);
+    this.epsgToGC(g.vertices, this.data.epsg);
+    
+    //
+    g.VerticesNeedUpdate = true;
+    g.computeFaceNormals();
+    g.computeVertexNormals();
+    g.computeBoundingSphere();
     //var canvas = this.el.sceneEl.canvas;
     //this.resolution.set( canvas.width,  canvas.height );
     //console.log( this.resolution );
     //this.update();
 
+  },
+  
+  epsg2GC: function (vertices, epsg) {
+    vertices = vertices.map(function(vertex) {
+      var gc = new THREE.Vector3(
+        1,
+        2,
+        3
+        );
+    });
+    return
   },
   
   update: function () {
