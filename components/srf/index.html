@@ -94,10 +94,6 @@
                 clat = Math.cos(source_lat);
                 Rn = A / Math.sqrt(1.0 - Eps2 * slat2);
                 RnPh = Rn + vertex.z;
-
-                    current.x = RnPh * clat * Math.cos(source_lon);
-                    current.y = RnPh * clat * Math.sin(source_lon);
-                    current.z = (C2oA2 * Rn + coords[i].z) * slat;
       var gc = new THREE.Vector3(
         RnPh * clat * Math.cos(source_lon),
         RnPh * clat * Math.sin(source_lon),
