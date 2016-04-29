@@ -60,7 +60,7 @@
     this._geoGeometry = g.clone();
     //var geom = new THREE.Geometry();
     //geom = geom.fromBufferGeometry(o3Ds.mesh.BufferGeometry);
-    this.epsgToGC(g.vertices, this.data.epsg);
+    g.vertices = this.epsgToGC(g.vertices, this.data.epsg);
     
     //
     g.VerticesNeedUpdate = true;
