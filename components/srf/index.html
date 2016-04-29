@@ -142,8 +142,8 @@
   </script>
     <a-scene>
       <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-1 1 0"></a-entity>
-      <a-entity position='0 0 10000000' look-at='0 0 0'>
-        <a-entity camera='far: 30000000; near: 3000' wasd-controls='acceleration:10000000'  ></a-entity>
+      <a-entity position='0 0 10000000'>
+        <a-entity camera='far: 30000000; near: 3000' look-controls wasd-controls='acceleration:10000000'  ></a-entity>
       </a-entity>
       
       <a-entity id='simpleEarth' position='0 0 0' geometry='primitive: sphere; radius: 6300000' material='color: blue; opacity: 0.2'></a-entity>
