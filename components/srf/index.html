@@ -75,12 +75,35 @@
   },
   
   epsg2GC: function (vertices, epsg) {
+                var A = 6378137;
+                var eccentricity = 298.257223563;
+                var A2 = A*A;
+                var F = 1.0/eccentricity;
+                var C = A*(1.0-F);
+                var C2 = C*C;
+                var C2oA2 = C2/A2;
+                var Eps2 = F*(2.0-F);
+                //var Eps25 = 0.25*Eps2;
+                var radiansPerDegree = 0.0174532925199432957692;
+                var slat, slat2, clat, source_lat, source_lon, Rn, RnPh
     vertices = vertices.map(function(vertex) {
+                source_lat = radiansPerDegree * vertex.y;
+                source_lon = radiansPerDegree * vertex.x;
+                slat = Math.sin(source_lat);
+                slat2 = slat*slat;
+                clat = Math.cos(source_lat);
+                Rn = A / Math.sqrt(1.0 - Eps2 * slat2);
+                RnPh = Rn + coords[i].z;
+
+                    current.x = RnPh * clat * Math.cos(source_lon);
+                    current.y = RnPh * clat * Math.sin(source_lon);
+                    current.z = (C2oA2 * Rn + coords[i].z) * slat;
       var gc = new THREE.Vector3(
-        1,
-        2,
-        3
+        RnPh * clat * Math.cos(source_lon),
+        RnPh * clat * Math.sin(source_lon),
+        (C2oA2 * Rn + vertex.z) * slat
         );
+      return gc;
     });
     return
   },
