@@ -86,7 +86,8 @@
                 //var Eps25 = 0.25*Eps2;
                 var radiansPerDegree = 0.0174532925199432957692;
                 var slat, slat2, clat, source_lat, source_lon, Rn, RnPh
-    vertices = vertices.map(function(vertex) {
+                var gc_vtc = [];
+      gc_vtc = vertices.map(function(vertex) {
                 source_lat = radiansPerDegree * vertex.y;
                 source_lon = radiansPerDegree * vertex.x;
                 slat = Math.sin(source_lat);
@@ -101,7 +102,7 @@
         );
       return gc;
     });
-    return
+    return gc_vtc;
   },
   
   update: function () {
