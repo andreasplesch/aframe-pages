@@ -58,8 +58,11 @@
     
     var g = o3Ds.mesh.geometry;
     this._geoGeometry = g.clone();
-    //var geom = new THREE.Geometry();
-    //geom = geom.fromBufferGeometry(o3Ds.mesh.BufferGeometry);
+    if (g.type === 'BufferGeometry') {
+      var geom = new THREE.Geometry();
+      geom = geom.fromBufferGeometry(g);
+      g = geom;
+    }
     g.vertices = this.epsgToGC(g.vertices, this.data.epsg);
     
     //
