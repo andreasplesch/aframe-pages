@@ -61,7 +61,7 @@
     if (g.type === 'BufferGeometry') {
       var geom = new THREE.Geometry();
       geom = geom.fromBufferGeometry(g);
-      g = geom;
+      o3Ds.mesh.geometry = g = geom;
     }
     g.vertices = this.epsgToGC(g.vertices, this.data.epsg);
     
