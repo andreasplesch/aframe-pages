@@ -24,7 +24,8 @@ AFRAME.registerComponent('faceset', {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
       }
     },
-    triangles: {} // like vertices
+    triangles: {}, // like vertices
+    uvs: {} // vec2s, vec2.parse ?
   },
   
   init: function () {
