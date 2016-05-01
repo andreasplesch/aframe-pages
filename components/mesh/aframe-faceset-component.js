@@ -1,4 +1,4 @@
-//THREE.mesh
+//THREE.geometry
 //directly provide vertices
-//and indices
+//and indices = faces
 //perhaps optionally triangulate
