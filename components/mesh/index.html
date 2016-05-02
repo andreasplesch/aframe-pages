@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe.js"></script>
+  <!--script src="https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js"></script-->
+  <script src="aframe-faceset-component.js"></script>
+  <!--script src="https://rawgit.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js"></script-->
+</head>
+<body>
+
+<a-scene> 
+  <a-assets>
+    <a-mixin id="red" meshline="lineWidthStyler: Math.sin( p * 3.14 ) ; lineWidth: 30; color: #E20049"></a-mixin>
+  </a-assets>
+  
+  <a-entity faceset material="color: #F79F24" position="0 0 -12"></a-entity>
+
+  <a-sky color="#FFEED0"></a-sky>
+</a-scene>
+
+</body>
+</html>
