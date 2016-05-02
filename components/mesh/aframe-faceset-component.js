@@ -25,7 +25,7 @@ AFRAME.registerComponent('faceset', {
       }
     },
     triangles: {}, // like vertices
-    uvs: {} // vec2s, vec2.parse ?
+    uvs: {} // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
   },
   
   init: function () {
