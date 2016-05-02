@@ -60,7 +60,7 @@ AFRAME.registerComponent('faceset', {
     var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
     var geometry = mesh.geometry;
     var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && 'translate' in diff);
-    var translateNeedsUpdate = !utils.deepEqual(data.translate, currentTranslate);
+    var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
 
     if (geometryNeedsUpdate) {
       geometry = mesh.geometry = getGeometry(this.data);
