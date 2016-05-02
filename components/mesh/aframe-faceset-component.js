@@ -83,13 +83,13 @@ AFRAME.registerComponent('faceset', {
 function getGeometry (data) {
   var geometry = new THREE.Geometry();
     
-  this.data.vertices.forEach(function (vec3) {
+  data.vertices.forEach(function (vec3) {
     geometry.vertices.push(
       new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
   });
   
-  this.data.triangles.forEach(function (vec3) {
+  data.triangles.forEach(function (vec3) {
     geometry.faces.push(
       new THREE.Face3(vec3.x, vec3.y, vec3.z)
     );
