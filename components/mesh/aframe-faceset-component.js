@@ -19,7 +19,16 @@ AFRAME.registerComponent('faceset', {
       ],
       // Deserialize path in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
       parse: function (value) {
-        return value.split(',').map(AFRAME.utils.coordinates.parse);
+        var mc = value.match(/([+\-0-9eE\.]+)/g);
+        var vecs = [];
+        var vec = {};
+        for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
+          vec.x = +mc[i+0];
+          vec.y = +mc[i+1];
+          vec.z = +mc[i+2];
+          vecs.push( vec );
+        }
+        return vecs;
       },
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
@@ -33,7 +42,16 @@ AFRAME.registerComponent('faceset', {
       ],
       // Deserialize index in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
       parse: function (value) {
-        return value.split(',').map(AFRAME.utils.coordinates.parse);
+        var mc = value.match(/([+\-0-9eE\.]+)/g);
+        var vecs = [];
+        var vec = {};
+        for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
+          vec.x = +mc[i+0];
+          vec.y = +mc[i+1];
+          vec.z = +mc[i+2];
+          vecs.push( vec );
+        }
+        return vecs;
       },
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
