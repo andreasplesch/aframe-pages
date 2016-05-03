@@ -47,6 +47,7 @@ AFRAME.registerComponent('faceset', {
         var vecs = [];
         var vec = {};
         for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
+          vec = {};
           vec.x = +mc[i+0];
           vec.y = +mc[i+1];
           vec.z = +mc[i+2];
