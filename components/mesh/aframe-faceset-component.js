@@ -37,6 +37,7 @@ AFRAME.registerComponent('faceset', {
       }
     }, 
     uvs: { type: 'vec2' }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
+    crease: { default: true },
     translate: { type: 'vec3' }
   },
   
@@ -55,7 +56,7 @@ AFRAME.registerComponent('faceset', {
     var data = this.data;
     var currentTranslate = previousData.translate || this.schema.translate.default;
     var diff = AFRAME.utils.diff(previousData, data);
-    var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
+    var mesh = this.el.getOrCreateObject3D('Mesh', THREE.Mesh);
     var g = mesh.geometry;
     var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && 'translate' in diff);
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
@@ -68,7 +69,7 @@ AFRAME.registerComponent('faceset', {
       applyTranslate(g, data.translate, currentTranslate);
     }
     
-    g.mergeVertices(); // make optional for faceted shading
+    if ( !data.crease ) { g.mergeVertices(); } // make optional for faceted shading
     g.VerticesNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
