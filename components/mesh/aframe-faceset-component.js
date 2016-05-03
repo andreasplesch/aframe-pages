@@ -57,7 +57,7 @@ AFRAME.registerComponent('faceset', {
       vecs.push( vec );
     }
     return vecs;
-  }
+  },
   
   init: function () {
     //always create new
