@@ -19,7 +19,7 @@ AFRAME.registerComponent('faceset', {
       ],
       // Deserialize vertices in the form of any-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
       parse: function (value) {
-        return this.parse (value);
+        return this.parse.bind (this, value);
       } ,
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
@@ -33,7 +33,7 @@ AFRAME.registerComponent('faceset', {
       ],
       // Deserialize index in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
       parse: function (value) {
-        return this.parse (value);
+        return this.parse.bind (this, value);
       } ,
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
