@@ -90,6 +90,7 @@ AFRAME.registerComponent('faceset', {
       applyTranslate(g, data.translate, currentTranslate);
     }
     
+    g.mergeVertices();
     g.VerticesNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
