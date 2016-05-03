@@ -64,7 +64,7 @@ AFRAME.registerComponent('faceset', {
     var diff = AFRAME.utils.diff(previousData, data);
     var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
     var g = mesh.geometry;
-    var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && 'translate' in diff);
+    var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && ('translate' in diff || 'uvs' in diff); // also except uvs only diff
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
 
     if (geometryNeedsUpdate) {
@@ -74,6 +74,9 @@ AFRAME.registerComponent('faceset', {
     if (translateNeedsUpdate) {
       applyTranslate(g, data.translate, currentTranslate);
     }
+    
+    //g.faceVertexUvs[0] = data.uvs
+    //if (data.uvs === []) {uvs based on bbox longest and second longest}
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.VerticesNeedUpdate = true;
