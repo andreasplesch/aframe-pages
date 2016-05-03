@@ -124,30 +124,39 @@ function getGeometry (data) {
       new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
   });
-  
-  //if no triangles triangulate
-  //vertices 2d array of arrays [[2, 4], [5, 6]]
-  //var triangles = Delaunay.triangulate(2dvertices);
-  //triangles flat array of indices [0, 1, 2,   2, 1, 3 ]
-  //find shortest dimension and ignore it for 2d vertices
-  //bb = geometry.computeBoundingBox or so
-  //size = bb.max - bb.min;
-  //xd='x',yd='y' // z smallest
-  // if size.x < size.y && size.x < size.z {xd='y',yd='z'}
-  // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
-  //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
-  //for (var i=0; i < triangles.length; i+=3) {
-    //geometry.faces.push(
-    // new THREE.Face3(triangles[i],triangles[i+1],triangles[i+2])
-    //);
-  //}
+
+  if (!data.triangles) {
+    //if no triangles triangulate
+    //vertices 2d array of arrays [[2, 4], [5, 6]]
+    //var triangles = Delaunay.triangulate(2dvertices);
+    //triangles flat array of indices [0, 1, 2,   2, 1, 3 ]
+    //find shortest dimension and ignore it for 2d vertices
+    //bb = geometry.computeBoundingBox or so
+    geometry.computeBoundingBox();
+    var bb = geometry.boundingBox;
+    //size = bb.max - bb.min;
+    var size = bb.max.clone();
+    size.sub(bb.min);
+    var xd = 'x', yd = 'y'; // z smallest
+    if ( (size.x < size.y) && (size.x < size.z) { xd = 'y'; yd = 'z';}
+    if ( (size.y < size.x) && (size.y < size.z) { xd = 'x'; yd = 'z';}
+    // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
+    var vertices2d = data.vertices.map(function (vtx) {return [ vtx[xd], vtx[yd] ]; });
+    //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
+    var triangles = Delaunay.triangulate(vertices2d);
+    for (var i=0; i < triangles.length; i+=3) {
+      geometry.faces.push(
+        new THREE.Face3( triangles[i], triangles[i+1], triangles[i+2] )
+      );
+    }
+    return geometry
+  }
   
   data.triangles.forEach(function (facet) {
     geometry.faces.push(
       new THREE.Face3(facet.x, facet.y, facet.z)
     );
   });
-  
   return geometry
 }
 
