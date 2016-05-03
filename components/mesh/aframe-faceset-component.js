@@ -41,6 +41,7 @@ AFRAME.registerComponent('faceset', {
       parse: function (value) { return parseVec2s (value) } ,
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(','); //redo stringify for 2d
+      }
     }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
     crease: { default: false },
     translate: { type: 'vec3' }
