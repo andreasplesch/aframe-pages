@@ -36,7 +36,12 @@ AFRAME.registerComponent('faceset', {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
       }
     }, 
-    uvs: { type: 'vec2' }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
+    uvs: { 
+      default: [],
+      parse: function (value) { return parseVec2s (value) } ,
+      stringify: function (data) {
+        return data.map(AFRAME.utils.coordinates.stringify).join(','); //redo stringify for 2d
+    }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
     crease: { default: false },
     translate: { type: 'vec3' }
   },
@@ -91,6 +96,17 @@ function parseVec3s (value) {
   var vec = {};
   for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
     vec = new THREE.Vector3(+mc[i+0], +mc[i+1], +mc[i+2]);
+    vecs.push( vec );
+  }
+  return vecs;
+}
+
+function parseVec2s (value) {
+  var mc = value.match(/([+\-0-9eE\.]+)/g);
+  var vecs = [];
+  var vec = {};
+  for (var i=0, n=mc?mc.length:0; i<n; i+=2) {
+    vec = new THREE.Vector2(+mc[i+0], +mc[i+1]);
     vecs.push( vec );
   }
   return vecs;
