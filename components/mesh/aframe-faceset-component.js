@@ -78,17 +78,22 @@ AFRAME.registerComponent('faceset', {
     var currentTranslate = previousData.translate || this.schema.translate.default;
     var diff = AFRAME.utils.diff(previousData, data);
     var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
-    var geometry = mesh.geometry;
+    var g = mesh.geometry;
     var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && 'translate' in diff);
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
 
     if (geometryNeedsUpdate) {
-      geometry = mesh.geometry = getGeometry(this.data);
+      g = mesh.geometry = getGeometry(this.data);
     }
     
     if (translateNeedsUpdate) {
-      applyTranslate(geometry, data.translate, currentTranslate);
+      applyTranslate(g, data.translate, currentTranslate);
     }
+    
+    g.VerticesNeedUpdate = true;
+    g.computeFaceNormals();
+    g.computeVertexNormals();
+    g.computeBoundingSphere();
     
   },
     
