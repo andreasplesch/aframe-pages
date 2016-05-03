@@ -125,6 +125,8 @@ function getGeometry (data) {
     );
   });
   
+  //if no triangles triangulate
+  //
   data.triangles.forEach(function (vec3) {
     geometry.faces.push(
       new THREE.Face3(vec3.x, vec3.y, vec3.z)
