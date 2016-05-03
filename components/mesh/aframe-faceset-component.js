@@ -89,10 +89,7 @@ function parseVec3s (value) {
   var vecs = [];
   var vec = {};
   for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
-    vec = {};
-    vec.x = +mc[i+0];
-    vec.y = +mc[i+1];
-    vec.z = +mc[i+2];
+    vec = new THREE.Vector3(+mc[i+0], +mc[i+1], +mc[i+2]);
     vecs.push( vec );
   }
   return vecs;
