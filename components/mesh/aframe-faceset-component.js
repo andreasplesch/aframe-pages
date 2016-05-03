@@ -90,7 +90,7 @@ AFRAME.registerComponent('faceset', {
       applyTranslate(g, data.translate, currentTranslate);
     }
     
-    g.mergeVertices();
+    g.mergeVertices(); // make optional for faceted shading
     g.VerticesNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
