@@ -138,8 +138,8 @@ function getGeometry (data) {
     var size = bb.max.clone();
     size.sub(bb.min);
     var xd = 'x', yd = 'y'; // z smallest
-    if ( (size.x < size.y) && (size.x < size.z) { xd = 'y'; yd = 'z';}
-    if ( (size.y < size.x) && (size.y < size.z) { xd = 'x'; yd = 'z';}
+    if ( (size.x < size.y) && (size.x < size.z) ) { xd = 'y'; yd = 'z';}
+    if ( (size.y < size.x) && (size.y < size.z) ) { xd = 'x'; yd = 'z';}
     // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
     var vertices2d = data.vertices.map(function (vtx) {return [ vtx[xd], vtx[yd] ]; });
     //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
