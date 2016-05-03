@@ -17,20 +17,8 @@ AFRAME.registerComponent('faceset', {
         { x: 0.5, y: 0, z: -0.5 },
         { x: -0.5, y: 0, z: -0.5 }
       ],
-      // Deserialize path in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
-      parse: function (value) {
-        var mc = value.match(/([+\-0-9eE\.]+)/g);
-        var vecs = [];
-        var vec = {};
-        for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
-          vec = {};
-          vec.x = +mc[i+0];
-          vec.y = +mc[i+1];
-          vec.z = +mc[i+2];
-          vecs.push( vec );
-        }
-        return vecs;
-      },
+      // Deserialize vertices in the form of any-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
+      parse: this.parse ,
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
@@ -42,26 +30,28 @@ AFRAME.registerComponent('faceset', {
         { x: 2, y: 3, z: 0 }
       ],
       // Deserialize index in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
-      parse: function (value) {
-        var mc = value.match(/([+\-0-9eE\.]+)/g);
-        var vecs = [];
-        var vec = {};
-        for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
-          vec = {};
-          vec.x = +mc[i+0];
-          vec.y = +mc[i+1];
-          vec.z = +mc[i+2];
-          vecs.push( vec );
-        }
-        return vecs;
-      },
+      parse: this.parse ,
       // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
       }
-    }, // like vertices
+    }, 
     uvs: { type: 'vec2' }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
     translate: { type: 'vec3' }
+  },
+  
+  parse: function (value) {
+    var mc = value.match(/([+\-0-9eE\.]+)/g);
+    var vecs = [];
+    var vec = {};
+    for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
+      vec = {};
+      vec.x = +mc[i+0];
+      vec.y = +mc[i+1];
+      vec.z = +mc[i+2];
+      vecs.push( vec );
+    }
+    return vecs;
   },
   
   init: function () {
