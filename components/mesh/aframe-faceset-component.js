@@ -142,9 +142,9 @@ function getGeometry (data) {
     //);
   //}
   
-  data.triangles.forEach(function (fac3) {
+  data.triangles.forEach(function (facet) {
     geometry.faces.push(
-      new THREE.Face3(fac3.x, fac3.y, fac3.z)
+      new THREE.Face3(facet.x, facet.y, facet.z)
     );
   });
   
