@@ -37,7 +37,7 @@ AFRAME.registerComponent('faceset', {
       }
     }, 
     uvs: { type: 'vec2' }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
-    crease: { default: true },
+    crease: { default: false },
     translate: { type: 'vec3' }
   },
   
