@@ -91,7 +91,7 @@ AFRAME.registerComponent('faceset', {
     }
     
     g.VerticesNeedUpdate = true;
-    g.computeFaceNormals();
+    //g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
     
