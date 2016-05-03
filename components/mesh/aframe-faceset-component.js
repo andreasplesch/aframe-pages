@@ -64,7 +64,7 @@ AFRAME.registerComponent('faceset', {
     var diff = AFRAME.utils.diff(previousData, data);
     var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
     var g = mesh.geometry;
-    var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && ('translate' in diff || 'uvs' in diff); // also except uvs only diff
+    var geometryNeedsUpdate = !(Object.keys(diff).length === 1 && ('translate' in diff); // || 'uvs' in diff); // also except uvs only diff
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
 
     if (geometryNeedsUpdate) {
