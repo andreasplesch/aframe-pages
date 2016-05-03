@@ -125,7 +125,7 @@ function getGeometry (data) {
     );
   });
 
-  if ( data.triangles === [] ) {
+  if ( data.triangles.length == 0 ) {
     //if no triangles triangulate
     //vertices 2d array of arrays [[2, 4], [5, 6]]
     //var triangles = Delaunay.triangulate(2dvertices);
