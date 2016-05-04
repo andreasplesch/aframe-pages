@@ -84,7 +84,7 @@ AFRAME.registerComponent('faceset', {
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
-    g.uvsNeedUpdate = !data.uvs.length === 0;
+    //g.uvsNeedUpdate = !data.uvs.length === 0;
     g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
