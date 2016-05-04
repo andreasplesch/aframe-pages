@@ -88,7 +88,7 @@ AFRAME.registerComponent('faceset', {
     var uvs = data.uvs ;
     var fs = g.faces ;
     if ( uvs.length > 0 ) {
-      var uvsLength = uvs.length ;
+      var uvsLength = +uvs.length ;
       //fill in missing uvs if any
       for (var i = uvsLength; i < g.vertices.length; i++) {
         uvs.push(uvs[uvsLength].clone) ;
@@ -124,7 +124,7 @@ AFRAME.registerComponent('faceset', {
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
-    g.uvsNeedUpdate = !uvs.length === 0;
+    g.uvsNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
