@@ -76,15 +76,16 @@ AFRAME.registerComponent('faceset', {
     //uvs
     var uvs = data.uvs ;
     var fs = g.faces ;
-    for (var i=0; i < fs.length; i++) {
-      g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
+    if ( uvs.length > 0 ) {
+      for (var i=0; i < fs.length; i++) {
+        g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
+      }
     }
-    
     //if (data.uvs === []) {uvs based on bbox longest and second longest}
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
-    //g.uvsNeedUpdate = !data.uvs.length === 0;
+    g.uvsNeedUpdate = !uvs.length === 0;
     g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
