@@ -72,12 +72,12 @@ AFRAME.registerComponent('faceset', {
       applyTranslate(g, data.translate, currentTranslate);
     }
     
-    //g.faceVertexUvs[0] = data.uvs
+    g.faceVertexUvs[0] = data.uvs
     //if (data.uvs === []) {uvs based on bbox longest and second longest}
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
-    //g.uvsNeedUpdate = true;
+    g.uvsNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
@@ -139,7 +139,13 @@ function getGeometry (data) {
     if ( (size.x < size.y) && (size.x < size.z) ) { xd = 'y'; yd = 'z';}
     if ( (size.y < size.x) && (size.y < size.z) ) { xd = 'x'; yd = 'z';}
     // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
-    var vertices2d = data.vertices.map(function (vtx) {return [ vtx[xd], vtx[yd] ]; });
+    var vertices2d = data.vertices.map(
+      function (vtx) {
+        //some very small fuzzing to avoid identical vertices for triangulation
+        var fuzz = 1/100000;
+        var xfuzz = size[xd] * Math.random() * fuzz;
+        var yfuzz = size[yd] * Math.random() * fuzz;
+        return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz; });
     //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
     var triangles = Delaunay.triangulate(vertices2d);
     for (var i=0; i < triangles.length; i+=3) {
