@@ -99,23 +99,16 @@ AFRAME.registerComponent('faceset', {
     }
     else {
       //produce default uvs
-      var bb = g.boundingBox;
-      var size = bb.max.clone();
-      size.sub(bb.min);
-      var dir = data.projectdir.toLowerCase();
-      if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
-        dir = 'z';
-        if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
-        if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
-        // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
-      }
+      var size = getBboxSize(g);
+      var dir = getProjectionDirection(data, size);
       var xd = this.dmaps.x[dir];
       var yd = this.dmaps.y[dir];
       var vs = g.vertices;
+      var bb = g.boundingBox ;
       var xoffset = bb.min[xd];
       var yoffset = bb.min[yd];
       var tmpUvs = [];
-      vs.forEach( function computeUV(v, i) {
+      vs.forEach( function computeUV(v) {
         tmpUvs.push( new THREE.Vector2 (
           (v[xd] - xoffset) / size[xd] ,
           (v[yd] - yoffset) / size[yd] 
@@ -178,34 +171,23 @@ function getGeometry (data, dmaps) {
 
   if ( data.triangles.length == 0 ) {
     //if no triangles triangulate
-    //vertices 2d array of arrays [[2, 4], [5, 6]]
-    //var triangles = Delaunay.triangulate(2dvertices);
-    //triangles flat array of indices [0, 1, 2,   2, 1, 3 ]
     //find shortest dimension and ignore it for 2d vertices
-    //bb = geometry.computeBoundingBox or so
-    var bb = geometry.boundingBox;
-    var size = bb.max.clone();
-    size.sub(bb.min);
-    var dir = data.projectdir.toLowerCase();
-    if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
-      dir = 'z';
-      if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
-      if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
-      // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
-    }
-    var  xd = dmaps.x[dir];
-    var  yd = dmaps.y[dir];
+    var size = getBboxSize(geometry);
+    var dir = getProjectionDirection(data, size);
+    var xd = dmaps.x[dir];
+    var yd = dmaps.y[dir];
     var vertices2d = data.vertices.map (
       function project (vtx) {
-        //some very small fuzzing to avoid identical vertices for triangulation
+        //some very minor fuzzing to avoid identical vertices for triangulation
         var fuzz = 1/100000;
         var xfuzz = size[xd] * Math.random() * fuzz;
         var yfuzz = size[yd] * Math.random() * fuzz;
         return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz ]
       }
     );
-    //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
-    var triangles = Delaunay.triangulate(vertices2d);
+    //vertices2d: array of arrays [[2, 4], [5, 6]]
+    //triangles: flat array of indices [0, 1, 2,   2, 1, 3 ]
+    var triangles = Delaunay.triangulate(vertices2d); 
     for (var i=0; i < triangles.length; i+=3) {
       geometry.faces.push(
         new THREE.Face3( triangles[i], triangles[i+1], triangles[i+2] )
@@ -220,6 +202,28 @@ function getGeometry (data, dmaps) {
     );
   });
   return geometry
+}
+
+function getBboxSize (geometry) {
+  
+  var bb = geometry.boundingBox;
+    
+  var size = bb.max.clone();
+  size.sub(bb.min);
+  return size
+  
+} 
+
+function getProjectionDirection (data, size) {
+  
+    var dir = data.projectdir.toLowerCase();
+    if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
+      dir = 'z';
+      if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
+      if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
+      // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
+    }
+    return dir
 }
 
 /**
