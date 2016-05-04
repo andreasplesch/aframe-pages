@@ -55,6 +55,7 @@ AFRAME.registerComponent('faceset', {
   },
   
   update: function (previousData) {
+    //todo: do real updates of only those properties which changed
     previousData = previousData || {};
     var data = this.data;
     var currentTranslate = previousData.translate || this.schema.translate.default;
@@ -83,7 +84,7 @@ AFRAME.registerComponent('faceset', {
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
-    g.uvsNeedUpdate = true;
+    g.uvsNeedUpdate = !data.uvs.length === 0;
     g.computeFaceNormals();
     g.computeVertexNormals();
     g.computeBoundingSphere();
