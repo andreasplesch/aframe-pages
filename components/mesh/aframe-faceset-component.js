@@ -145,6 +145,8 @@ function getGeometry (data, dmaps) {
       new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
   });
+  
+  geometry.computeBoundingBox();
 
   if ( data.triangles.length == 0 ) {
     //if no triangles triangulate
@@ -153,13 +155,11 @@ function getGeometry (data, dmaps) {
     //triangles flat array of indices [0, 1, 2,   2, 1, 3 ]
     //find shortest dimension and ignore it for 2d vertices
     //bb = geometry.computeBoundingBox or so
-    geometry.computeBoundingBox();
     var bb = geometry.boundingBox;
-    //size = bb.max - bb.min;
     var size = bb.max.clone();
     size.sub(bb.min);
-    var dir = data.projectdir;
-    if (!['x', 'y', 'z'].some(function(d){ return d === dir })) {
+    var dir = data.projectdir.toLowerCase();
+    if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
       dir = 'z';
       if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
       if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
