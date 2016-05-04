@@ -39,12 +39,12 @@ AFRAME.registerComponent('faceset', {
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(','); //redo stringify for 2d
       }
-    }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
+    }, // stringify may not be ok (just recreate for 2d)
     crease: { default: false },
     projectdir: { 
       type: 'string',
       default: 'auto'
-    }, // normal along which to project, x,y and z are recognized
+    }, // normal along which to project, x, y and z are recognized; otherwise based on bb
     translate: { type: 'vec3' }
   },
   
@@ -65,10 +65,6 @@ AFRAME.registerComponent('faceset', {
     }
   },
 
-  do_update: function () {
-  
-  },
-  
   update: function (previousData) {
     //todo: do real updates of only those properties which changed
     previousData = previousData || {};
@@ -92,11 +88,38 @@ AFRAME.registerComponent('faceset', {
     var uvs = data.uvs ;
     var fs = g.faces ;
     if ( uvs.length > 0 ) {
+      var uvsLength = uvs.length ;
+      //fill in missing uvs if any
+      for (var i = uvsLength; i < g.vertices.length; i++) {
+        uvs[i] = uvs[uvsLength].clone ;
+      }
       for (var i=0; i < fs.length; i++) {
         g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
       }
     }
-    //if (data.uvs === []) {uvs based on bbox longest and second longest}
+    else {
+      //produce default uvs
+      var bb = g.boundingBox
+      var size = bb.max.clone();
+      size.sub(bb.min);
+      var dir = 'z';
+      if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
+      if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
+      var xd = dmaps.x[dir];
+      var yd = dmaps.y[dir];
+      var vs = g.vertices;
+      var xoffset = bb.min[xd];
+      var yoffset = bb.min[yd];
+      vs.forEach( function computeUV(v, i) {
+        uvs[i] = new THREE.Vector2 (
+          (v[xd] - xoffset) / size[xd] ,
+          (v[yd] - yoffset) / size[yd] 
+          );
+      });
+      fs.forEach( function assignUVs(f, i) {
+        gg.faceVertexUvs[0].push( [ uvs[f.a], uvs[f.b], uvs[f.c] ]) ;
+      });
+    }
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
@@ -140,7 +163,7 @@ function parseVec2s (value) {
 function getGeometry (data, dmaps) {
   var geometry = new THREE.Geometry();
     
-  data.vertices.forEach(function (vec3) {
+  data.vertices.forEach(function fillVertices (vec3) {
     geometry.vertices.push(
       new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
@@ -168,7 +191,7 @@ function getGeometry (data, dmaps) {
     var  xd = dmaps.x[dir];
     var  yd = dmaps.y[dir];
     var vertices2d = data.vertices.map (
-      function (vtx) {
+      function project (vtx) {
         //some very small fuzzing to avoid identical vertices for triangulation
         var fuzz = 1/100000;
         var xfuzz = size[xd] * Math.random() * fuzz;
@@ -186,7 +209,7 @@ function getGeometry (data, dmaps) {
     return geometry
   }
   
-  data.triangles.forEach(function (facet) {
+  data.triangles.forEach(function fillFaces (facet) {
     geometry.faces.push(
       new THREE.Face3(facet.x, facet.y, facet.z)
     );
