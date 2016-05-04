@@ -35,7 +35,7 @@ AFRAME.registerComponent('faceset', {
     }, 
     uvs: { 
       default: [],
-      parse: function (value) { return parseVec2s (value) } ,
+      parse: function (uvvalue) { return parseVec2s (uvvalue) } ,
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(','); //redo stringify for 2d
       }
