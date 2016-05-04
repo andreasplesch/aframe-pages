@@ -72,7 +72,13 @@ AFRAME.registerComponent('faceset', {
       applyTranslate(g, data.translate, currentTranslate);
     }
     
-    g.faceVertexUvs[0] = data.uvs
+    //uvs
+    var uvs = data.uvs ;
+    var fs = g.faces ;
+    for (var i=0; i < fs.length; i++) {
+      g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
+    }
+    
     //if (data.uvs === []) {uvs based on bbox longest and second longest}
     
     if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
