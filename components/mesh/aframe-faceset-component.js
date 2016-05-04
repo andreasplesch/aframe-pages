@@ -99,7 +99,7 @@ AFRAME.registerComponent('faceset', {
     }
     else {
       //produce default uvs
-      var bb = g.boundingBox
+      var bb = g.boundingBox;
       var size = bb.max.clone();
       size.sub(bb.min);
       var dir = 'z';
