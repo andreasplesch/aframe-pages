@@ -33,7 +33,7 @@ AFRAME.registerComponent('faceset', {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
       }
     }, 
-    uvs: { 
+    uvs: { // texture coordinates as list 
       default: [],
       parse: function (value) { return parseVec2s (value) } ,
       stringify: function (data) {
@@ -42,7 +42,7 @@ AFRAME.registerComponent('faceset', {
           return [data.x, data.y].join(' ');
         }).join(',');
       }
-    }, // stringify may not be ok (just recreate for 2d)
+    },
     crease: { default: false },
     projectdir: { 
       type: 'string',
