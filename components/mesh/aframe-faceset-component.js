@@ -41,13 +41,28 @@ AFRAME.registerComponent('faceset', {
       }
     }, // vec2s, coordinate.parse ok but stringify may not be ok (just recreate for 2d)
     crease: { default: false },
+    projectdir: { 
+      type: 'string',
+      default: ''
+    }, // normal along which to project, x,y and z are recognized
     translate: { type: 'vec3' }
   },
   
-  
-  
   init: function () {
     //always create new
+    //collapse onto which plane
+    this.dmaps = {
+      x: {      //2d x coordinate will be
+        x: 'y', //y if x size is smallest
+        y: 'x',
+        z: 'x'
+      },
+      y: {
+        x: 'z',
+        y: 'z',
+        z: 'y'
+      }
+    }
   },
 
   do_update: function () {
@@ -66,7 +81,7 @@ AFRAME.registerComponent('faceset', {
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
 
     if (geometryNeedsUpdate) {
-      g = mesh.geometry = getGeometry(this.data);
+      g = mesh.geometry = getGeometry(this.data, this.dmaps);
     }
     
     if (translateNeedsUpdate) {
@@ -122,7 +137,7 @@ function parseVec2s (value) {
   return vecs;
 }
   
-function getGeometry (data) {
+function getGeometry (data, dmaps) {
   var geometry = new THREE.Geometry();
     
   data.vertices.forEach(function (vec3) {
@@ -143,10 +158,15 @@ function getGeometry (data) {
     //size = bb.max - bb.min;
     var size = bb.max.clone();
     size.sub(bb.min);
-    var xd = 'x', yd = 'y'; // z smallest
-    if ( (size.x < size.y) && (size.x < size.z) ) { xd = 'y'; yd = 'z';}
-    if ( (size.y < size.x) && (size.y < size.z) ) { xd = 'x'; yd = 'z';}
-    // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
+    var dir = data.projectdir;
+    if (!['x', 'y', 'z'].some(function(d){ return d === dir }) {
+      dir = 'z';
+      if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
+      if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
+      // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
+    }
+    var  xd = dmaps.x[dir];
+    var  yd = dmaps.y[dir];
     var vertices2d = data.vertices.map (
       function (vtx) {
         //some very small fuzzing to avoid identical vertices for triangulation
