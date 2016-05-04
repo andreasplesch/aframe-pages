@@ -43,7 +43,7 @@ AFRAME.registerComponent('faceset', {
     crease: { default: false },
     projectdir: { 
       type: 'string',
-      default: ''
+      default: 'auto'
     }, // normal along which to project, x,y and z are recognized
     translate: { type: 'vec3' }
   },
