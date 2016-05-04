@@ -40,7 +40,7 @@ AFRAME.registerComponent('faceset', {
         return data.map( function stringify (data) {
           if (typeof data !== 'object') { return data; }
           return [data.x, data.y].join(' ');
-        }.join(',');
+        }).join(',');
       }
     }, // stringify may not be ok (just recreate for 2d)
     crease: { default: false },
