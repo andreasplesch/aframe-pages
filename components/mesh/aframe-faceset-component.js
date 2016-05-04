@@ -145,7 +145,7 @@ function getGeometry (data) {
         var fuzz = 1/100000;
         var xfuzz = size[xd] * Math.random() * fuzz;
         var yfuzz = size[yd] * Math.random() * fuzz;
-        return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz; ]
+        return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz ]
       }
     );
     //2dvertices = vertices.map(function(vtx){return [ vtx[xd], vtx[yd] ]});
