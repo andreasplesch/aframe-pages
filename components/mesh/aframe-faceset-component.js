@@ -102,9 +102,13 @@ AFRAME.registerComponent('faceset', {
       var bb = g.boundingBox;
       var size = bb.max.clone();
       size.sub(bb.min);
-      var dir = 'z';
-      if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
-      if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
+      var dir = data.projectdir.toLowerCase();
+      if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
+        dir = 'z';
+        if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
+        if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
+        // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
+      }
       var xd = this.dmaps.x[dir];
       var yd = this.dmaps.y[dir];
       var vs = g.vertices;
@@ -118,7 +122,7 @@ AFRAME.registerComponent('faceset', {
           ));
       });
       fs.forEach( function assignUVs(f, i) {
-        g.faceVertexUvs[0].push( [ uvs[f.a], uvs[f.b], uvs[f.c] ]) ;
+        g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
       });
     }
     
