@@ -105,8 +105,8 @@ AFRAME.registerComponent('faceset', {
       var dir = 'z';
       if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
       if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
-      var xd = dmaps.x[dir];
-      var yd = dmaps.y[dir];
+      var xd = this.dmaps.x[dir];
+      var yd = this.dmaps.y[dir];
       var vs = g.vertices;
       var xoffset = bb.min[xd];
       var yoffset = bb.min[yd];
