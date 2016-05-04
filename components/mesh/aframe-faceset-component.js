@@ -117,7 +117,7 @@ AFRAME.registerComponent('faceset', {
           );
       });
       fs.forEach( function assignUVs(f, i) {
-        gg.faceVertexUvs[0].push( [ uvs[f.a], uvs[f.b], uvs[f.c] ]) ;
+        g.faceVertexUvs[0].push( [ uvs[f.a], uvs[f.b], uvs[f.c] ]) ;
       });
     }
     
