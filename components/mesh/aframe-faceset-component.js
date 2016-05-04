@@ -159,7 +159,7 @@ function getGeometry (data, dmaps) {
     var size = bb.max.clone();
     size.sub(bb.min);
     var dir = data.projectdir;
-    if (!['x', 'y', 'z'].some(function(d){ return d === dir }) {
+    if (!['x', 'y', 'z'].some(function(d){ return d === dir })) {
       dir = 'z';
       if ( (size.x < size.y) && (size.x < size.z) ) { dir = 'x';}
       if ( (size.y < size.x) && (size.y < size.z) ) { dir = 'y';}
