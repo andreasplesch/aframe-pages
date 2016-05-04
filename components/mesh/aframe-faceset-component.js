@@ -91,7 +91,7 @@ AFRAME.registerComponent('faceset', {
       var uvsLength = uvs.length ;
       //fill in missing uvs if any
       for (var i = uvsLength; i < g.vertices.length; i++) {
-        uvs[i] = uvs[uvsLength].clone ;
+        uvs.push(uvs[uvsLength].clone) ;
       }
       for (var i=0; i < fs.length; i++) {
         g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
@@ -110,11 +110,12 @@ AFRAME.registerComponent('faceset', {
       var vs = g.vertices;
       var xoffset = bb.min[xd];
       var yoffset = bb.min[yd];
+      var tmpUvs = [];
       vs.forEach( function computeUV(v, i) {
-        uvs[i] = new THREE.Vector2 (
+        tmpUvs.push( new THREE.Vector2 (
           (v[xd] - xoffset) / size[xd] ,
           (v[yd] - yoffset) / size[yd] 
-          );
+          ));
       });
       fs.forEach( function assignUVs(f, i) {
         g.faceVertexUvs[0].push( [ uvs[f.a], uvs[f.b], uvs[f.c] ]) ;
