@@ -106,8 +106,8 @@ AFRAME.registerComponent('faceset', {
     }
     else {
       //produce default uvs
-      var size = getBboxSize(g);
-      var dir = getProjectionDirection(data, size);
+      var size = BboxSize(g);
+      var dir = ProjectionDirection(data, size);
       var xd = this.dmaps.x[dir];
       var yd = this.dmaps.y[dir];
       var vs = g.vertices;
@@ -125,6 +125,7 @@ AFRAME.registerComponent('faceset', {
         g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
       });
     }
+    
     g.mergeVertices();
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
@@ -181,14 +182,14 @@ function getGeometry (data, dmaps) {
   if ( data.triangles.length == 0 ) {
     //if no triangles triangulate
     //find shortest dimension and ignore it for 2d vertices
-    var size = getBboxSize(geometry);
-    var dir = getProjectionDirection(data, size);
+    var size = BboxSize(geometry);
+    var dir = ProjectionDirection(data, size);
     var xd = dmaps.x[dir];
     var yd = dmaps.y[dir];
     var vertices2d = data.vertices.map (
       function project (vtx) {
         //some very minor fuzzing to avoid identical vertices for triangulation
-        var fuzz = 1/10000;
+        var fuzz = 1/10000; // 1/100000 too small if size around 1
         var xfuzz = size[xd] * (Math.random() - 0.5) * fuzz;
         var yfuzz = size[yd] * (Math.random() - 0.5) * fuzz;
         return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz ]
@@ -196,7 +197,7 @@ function getGeometry (data, dmaps) {
     );
     //vertices2d: array of arrays [[2, 4], [5, 6]]
     //triangles: flat array of indices [0, 1, 2,   2, 1, 3 ]
-    var triangles = Delaunay.triangulate(vertices2d); 
+    var triangles = Delaunay.triangulate(vertices2d); // look for a more robust algo
     for (var i=0; i < triangles.length; i+=3) {
       geometry.faces.push(
         new THREE.Face3( triangles[i], triangles[i+1], triangles[i+2] )
@@ -213,7 +214,7 @@ function getGeometry (data, dmaps) {
   return geometry
 }
 
-function getBboxSize (geometry) {
+function BboxSize (geometry) {
   
   var bb = geometry.boundingBox;
     
@@ -223,7 +224,7 @@ function getBboxSize (geometry) {
   
 } 
 
-function getProjectionDirection (data, size) {
+function ProjectionDirection (data, size) {
   
     var dir = data.projectdir.toLowerCase();
     if ( !(dir === 'x' || dir === 'y' || dir === 'z') ) { // auto dir
