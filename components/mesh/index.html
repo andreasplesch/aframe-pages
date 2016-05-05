@@ -32,7 +32,7 @@
             look-at="[camera]"></a-entity>
   <a-entity id='forTriangulation1' faceset="vertices: -2 0 2, 2 0 2, 2 0 -2, -2 0 -2, 0 -1.9 0; uvs: 0 0, 1 0, 1 1, 0 1, 0.5 0.5" 
             material="src: #my-texture; color: darkorange; roughness: 0.1; metalness: 0.5; side: double" position="0 -2 0"></a-entity>
-  <a-entity id='dyn' faceset='crease: true; projectdir: y' material="color: red; roughness: 0.5; metalness: 0.5;" scale='25 1 25' position='-12.5 -4 -12.5'></a-entity>
+  <a-entity id='dyn' faceset='crease: true; projectdir: y' material="color: red; roughness: 0.5; metalness: 0.5;" scale='25 0.5 25' position='-12.5 -5 -12.5'></a-entity>
   <a-sky color="#FFEED0"></a-sky>
 </a-scene>
 <script>
@@ -45,7 +45,7 @@
     var z;
     for (var x = 0; x < 1; x += 1/n) {
       for (var y = 0; y < 1; y += 1/n) {
-        z = Math.cos( x*xs + t/1000 ) + Math.cos( y*ys + t/1000);
+        z = Math.cos( x*xs + t/1000 ) + Math.cos( y*ys + t/1000 );
         verts.push([x, z, y].join(' '));
       }
     }
