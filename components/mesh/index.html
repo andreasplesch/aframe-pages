@@ -43,8 +43,8 @@
   
   var verts = genSurface(performance.now());
   ent.setAttribute('faceset', 'vertices', verts);
-  var tris = genTriangles(n);
-  ent.setAttribute('faceset', 'triangles', tris);
+  //var tris = genTriangles(n);
+  //ent.setAttribute('faceset', 'triangles', tris);
   
   function animate(t) {
     ent.setAttribute('faceset', 'vertices', genSurface(t));
