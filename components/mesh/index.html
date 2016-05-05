@@ -43,13 +43,11 @@
   for (var x = 0; x < n; x++) {
     for (var y = 0; y < n; y++) {
       z = Math.cos( x + Math.random()/n)*Math.cos( y + Math.random()/n);
-      verts.push(x);
-      verts.push(z);
-      verts.push(y);
+      verts.push([x, z, y].join(' '));
     }
   }
   ent.setAttribute('faceset', 'vertices', verts.join(' '));
-  ent.setAttribute('faceset', 'crease', true;);
+  ent.setAttribute('faceset', 'crease', true);
 </script>
 </body>
 </html>
