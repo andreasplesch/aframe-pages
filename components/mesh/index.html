@@ -15,7 +15,7 @@
     <img id="my-texture" src="macaca_nigra_self-portrait.jpg">
   </a-assets>
   
-  <a-entity camera look-controls wasd-controls='fly: true' position='0 2 7'></a-entity>
+  <a-entity camera look-controls wasd-controls='fly: true' position='0 0 7'></a-entity>
   
   <a-entity light="type: directional; color: #FFF; intensity: 1.0" position="-100 100 100"></a-entity>
   <a-entity light="type: directional; color: #FFF; intensity: 1.0" position="100 100 100"></a-entity>
@@ -32,7 +32,7 @@
             look-at="[camera]"></a-entity>
   <a-entity id='forTriangulation1' faceset="vertices: -2 0 2, 2 0 2, 2 0 -2, -2 0 -2, 0 -1.9 0; uvs: 0 0, 1 0, 1 1, 0 1, 0.5 0.5" 
             material="src: #my-texture; color: darkorange; roughness: 0.1; metalness: 0.5; side: double" position="0 -2 0"></a-entity>
-  <a-entity id='dyn' faceset='crease: true; projectdir: y' material="color: red; roughness: 0.5; metalness: 0.5; side: double" scale='25 1 25' position='-12.5 -3 -12.5'></a-entity>
+  <a-entity id='dyn' faceset='crease: true; projectdir: y' material="color: red; roughness: 0.5; metalness: 0.5;" scale='25 1 25' position='-12.5 -4 -12.5'></a-entity>
   <a-sky color="#FFEED0"></a-sky>
 </a-scene>
 <script>
