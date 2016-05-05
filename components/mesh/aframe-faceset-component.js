@@ -186,7 +186,7 @@ function parseVec2s (value) {
 }
   
 function updateGeometry (g, data, dmaps, facesNeedUpdate) {
-  var geometry = g.clone;
+  var geometry = g.clone();
   
   geometry.vertices = data.vertices;
   /*
