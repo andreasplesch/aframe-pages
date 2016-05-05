@@ -51,8 +51,9 @@ window.onload = function () {
   
   var verts = genSurface(performance.now());
   ent.setAttribute('faceset', 'vertices', verts);
-  var tris = genTriangles(n);
-  ent.setAttribute('faceset', 'triangles', tris);
+  ent.setAttribute('faceset', 'triangles', ent.Object3D.mesh.geometry.faces);
+  //var tris = genTriangles(n);
+  //ent.setAttribute('faceset', 'triangles', tris);
   
   function animate(t) {
     ent.setAttribute('faceset', 'vertices', genSurface(t));
