@@ -193,8 +193,8 @@ function updateGeometry (g, data, dmaps, facesNeedUpdate) {
   data.vertices.forEach(function fillVertices (vec3, i) {
     geometry.vertices[i].copy(vec3);
       //new THREE.Vector3(vec3.x, vec3.y, vec3.z)
-    );
-  });
+    //);
+  } ) ;
 
   geometry.computeBoundingBox();
 
