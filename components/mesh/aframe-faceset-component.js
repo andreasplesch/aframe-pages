@@ -170,12 +170,15 @@ function parseVec2s (value) {
   
 function getGeometry (data, dmaps) {
   var geometry = new THREE.Geometry();
-    
+  
+  geometry.vertices = data.vertices;
+  /*
   data.vertices.forEach(function fillVertices (vec3) {
     geometry.vertices.push(
       new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
   });
+  */
   
   geometry.computeBoundingBox();
 
