@@ -133,7 +133,7 @@ AFRAME.registerComponent('faceset', {
     
     g.mergeVertices();
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
-    g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
+    g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
     g.uvsNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
@@ -186,7 +186,7 @@ function parseVec2s (value) {
 }
   
 function updateGeometry (g, data, dmaps, facesNeedUpdate) {
-  var geometry = g;
+  var geometry = g.clone;
   
   geometry.vertices = data.vertices;
   /*
