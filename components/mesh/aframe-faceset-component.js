@@ -121,8 +121,8 @@ AFRAME.registerComponent('faceset', {
         g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
       });
     }
-    
-    if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
+    g.mergeVertices();
+    //if (!data.crease) { g.mergeVertices() }; // make optional for faceted shading
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
     g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
     g.uvsNeedUpdate = true;
