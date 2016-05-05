@@ -133,7 +133,7 @@ AFRAME.registerComponent('faceset', {
     
     g.mergeVertices();
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
-    g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
+    //g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
     g.uvsNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
