@@ -74,7 +74,8 @@ window.onload = function () {
       for (var y = 0; y < 1; y += 1/n) {
         zz = Math.pow(Math.cos( x*xs + t/1000 ),2) + Math.cos( y*ys + Math.pow(Math.sin(t/1000), 2) );
         xx = x + 0.5*Math.cos(t*t/1000)/n;
-        verts.push([xx, z, y].join(' '));
+        yy = y;
+        verts.push([xx, zz, yy].join(' '));
       }
     }
     return verts.join(' ');
