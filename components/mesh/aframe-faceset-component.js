@@ -78,13 +78,15 @@ AFRAME.registerComponent('faceset', {
     var data = this.data;
     var currentTranslate = previousData.translate || this.schema.translate.default;
     var currentVertices = previousData.vertices || this.schema.vertices.default;
+    var currentTriangles = previousData.triangles || this.schema.triangles.default;
     
     var diff = AFRAME.utils.diff(previousData, data);
     var mesh = this.el.getOrCreateObject3D('mesh', THREE.Mesh);
     var g = mesh.geometry;
     var geometryNeedsUpdate = !( Object.keys(diff).length === 1 && ('translate' in diff || 'uvs' in diff) ); // also except uvs only diff
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
-    var facesNeedUpdate = data.vertices.length !== currentVertices.length || 'triangles' in diff ;
+    var facesNeedUpdate = data.vertices.length !== currentVertices.length || 
+                          data.triangles.length !== currentTriangles.length ;
 
     if (geometryNeedsUpdate) {
       g = mesh.geometry = getGeometry(this.data, this.dmaps, facesNeedUpdate);
