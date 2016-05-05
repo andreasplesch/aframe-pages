@@ -89,7 +89,7 @@ AFRAME.registerComponent('faceset', {
                           ( data.triangles.length !== g.faces.length ) ;
 
     if (geometryNeedsUpdate) {
-      g = mesh.geometry = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
+      g = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
     }
     
     if (translateNeedsUpdate) {
