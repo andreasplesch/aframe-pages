@@ -32,14 +32,14 @@
             look-at="[camera]"></a-entity>
   <a-entity id='forTriangulation1' faceset="vertices: -2 0 2, 2 0 2, 2 0 -2, -2 0 -2, 0 -1.9 0; uvs: 0 0, 1 0, 1 1, 0 1, 0.5 0.5" 
             material="src: #my-texture; color: darkorange; roughness: 0.1; metalness: 0.5; side: double" position="0 -2 0"></a-entity>
-  <a-entity id='dyn' faceset='crease: false' material="color: lightblue" scale='0.5 0.5 0.5' position='-2.5 -3 -2.5'></a-entity>
+  <a-entity id='dyn' faceset='crease: false' material="color: lightblue" scale='0.5 0.2 0.5' position='-25 -3 -25'></a-entity>
   <a-sky color="#FFEED0"></a-sky>
 </a-scene>
 <script>
   var ent = document.querySelector("#dyn");
-  var n = 10;
-  var xs = 20*Math.random()/n;
-  var ys = 20*Math.random()/n;
+  var n = 50;
+  var xs = 500*Math.random()/n;
+  var ys = 500*Math.random()/n;
   function genSurface(t) {
     var verts = [];
     var z;
