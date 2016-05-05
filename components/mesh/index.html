@@ -37,6 +37,7 @@
 </a-scene>
 </body>
 <script>
+window.onload = function () {
   var ent = document.querySelector("#dyn");
   var n = 50;
   var xs = (2+Math.random()*n/4)*Math.PI;
@@ -77,6 +78,6 @@
     }
     return verts.join(' ');
   }
-    
+}    
 </script>
 </html>
