@@ -209,11 +209,14 @@ function getGeometry (data, dmaps) {
     return geometry
   }
   
+  geometry.faces = data.triangles ;
+  /*
   data.triangles.forEach(function fillFaces (facet) {
     geometry.faces.push(
       new THREE.Face3(facet.x, facet.y, facet.z)
     );
   });
+  */
   return geometry
 }
 
