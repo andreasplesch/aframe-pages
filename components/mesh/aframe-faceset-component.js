@@ -89,7 +89,7 @@ AFRAME.registerComponent('faceset', {
                           ( data.triangles.length !== currentTriangles.length ) ;
 
     if (geometryNeedsUpdate) {
-      g = mesh.geometry = getGeometry(this.data, this.dmaps, facesNeedUpdate);
+      g = mesh.geometry = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
     }
     
     if (translateNeedsUpdate) {
@@ -185,8 +185,8 @@ function parseVec2s (value) {
   return vecs;
 }
   
-function getGeometry (data, dmaps, facesNeedUpdate) {
-  var geometry = new THREE.Geometry();
+function updateGeometry (g, data, dmaps, facesNeedUpdate) {
+  var geometry = g;
   
   geometry.vertices = data.vertices;
   /*
