@@ -70,6 +70,10 @@ AFRAME.registerComponent('faceset', {
 
   update: function (previousData) {
     //todo: do real updates of only those properties which changed
+    //if vertices.length changed, update vertices, faces, uvs
+    //else if vertices changed update vertices
+    // if faces changed update faces
+    // if uvs changed update uvs
     previousData = previousData || {};
     var data = this.data;
     var currentTranslate = previousData.translate || this.schema.translate.default;
