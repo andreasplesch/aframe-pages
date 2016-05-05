@@ -43,10 +43,10 @@
   function genSurface(t) {
     var verts = [];
     var z;
-    for (var x = 0; x < 1; x += 1/n) {
-      for (var y = 0; y < 1; y += 1/n) {
-        z = Math.cos( x*xs + t/1000 ) + Math.cos( y*ys + t/1000 );
-        verts.push([x, z, y].join(' '));
+    for (var x = 0; x < n; x++) {
+      for (var y = 0; y < n; y++) {
+        z = Math.cos( x/n*xs + t/1000 ) + Math.cos( y/n*ys + t/1000 );
+        verts.push([x/n, z/n, y].join(' '));
       }
     }
     ent.setAttribute('faceset', 'vertices', verts.join(' '));
