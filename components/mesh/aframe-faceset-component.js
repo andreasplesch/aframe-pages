@@ -189,11 +189,9 @@ function updateGeometry (g, data, dmaps, facesNeedUpdate) {
   var geometry = g;
   
   //geometry.vertices = data.vertices;
-  
+  geometry.vertices = [];
   data.vertices.forEach(function fillVertices (vec3, i) {
-    geometry.vertices[i].copy(vec3);
-      //new THREE.Vector3(vec3.x, vec3.y, vec3.z)
-    //);
+    geometry.vertices.push(  vec3  );
   } ) ;
 
   geometry.computeBoundingBox();
