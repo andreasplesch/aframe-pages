@@ -51,7 +51,7 @@ window.onload = function () {
   
   var verts = genSurface(performance.now());
   ent.setAttribute('faceset', 'vertices', verts);
-  ent.setAttribute('faceset', 'triangles', ent.object3DMap.mesh.geometry.faces);
+  ent.setAttribute('faceset', 'triangles', ent.object3DMap.mesh.geometry.faces.copy());
   //var tris = genTriangles(n);
   //ent.setAttribute('faceset', 'triangles', tris);
   
