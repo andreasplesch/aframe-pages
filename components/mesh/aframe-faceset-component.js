@@ -186,7 +186,7 @@ function getGeometry (data, dmaps) {
     var vertices2d = data.vertices.map (
       function project (vtx) {
         //some very minor fuzzing to avoid identical vertices for triangulation
-        var fuzz = 1/100000;
+        var fuzz = 1/10000;
         var xfuzz = size[xd] * Math.random() * fuzz;
         var yfuzz = size[yd] * Math.random() * fuzz;
         return [ vtx[xd] + xfuzz, vtx[yd] + yfuzz ]
