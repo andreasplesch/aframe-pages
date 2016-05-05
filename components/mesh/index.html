@@ -81,7 +81,7 @@ window.onload = function () {
         zz = Math.pow(Math.cos( x*xs + t/1000 ),2) + Math.cos( y*ys + Math.pow(Math.sin(t/1000), 2) );
         yy = y + 0.5*Math.cos(y*ys + Math.pow(t/10000,2))/n;
         xx = x;
-        verts.push(new THREE.Vector3(xx, xx, y));
+        verts.push(new THREE.Vector3(xx, zz, yy));
       }
     }
     return verts;
