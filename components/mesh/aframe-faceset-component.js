@@ -186,7 +186,7 @@ function parseVec2s (value) {
 }
   
 function updateGeometry (g, data, dmaps, facesNeedUpdate) {
-  var geometry = new THREE.geometry();
+  var geometry = new THREE.Geometry();
   
   geometry.vertices = data.vertices;
   /*
