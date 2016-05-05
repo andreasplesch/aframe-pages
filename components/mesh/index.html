@@ -40,6 +40,31 @@
   var n = 50;
   var xs = (2+Math.random()*n/4)*Math.PI;
   var ys = (2+Math.random()*n/4)*Math.PI;
+  
+  var verts = genSurface(performance.now());
+  ent.setAttribute('faceset', 'vertices', verts);
+  var tris = genTriangles(n);
+  ent.setAttribute('faceset', 'triangles', tris);
+  
+  function animate(t) {
+    ent.setAttribute('faceset', 'vertices', genSurface(t));
+    //ent.setAttribute('faceset', 'crease', false);
+    window.requestAnimationFrame(animate);
+  }
+  
+  window.requestAnimationFrame(animate);
+  
+  function genTriangles(n) {
+    var tris = [];
+    for (var x = 0; x < n-1; x++) {
+      for (var y = 0; y < n-1; y++) {
+        tris.push([y*x, (y+1)*x, y*(x+1)].join(' '));
+        tris.push([(y+1)*x, (y+1)*(x+1), y*(x+1)].join(' '));
+      }
+    }
+    return tris.join(' ')
+  }
+  
   function genSurface(t) {
     var verts = [];
     var z;
@@ -49,6 +74,10 @@
         verts.push([x, z, y].join(' '));
       }
     }
+    return verts.join(' ');
+  }
+  
+  
     ent.setAttribute('faceset', 'vertices', verts.join(' '));
     //ent.setAttribute('faceset', 'crease', false);
     window.requestAnimationFrame(genSurface);
