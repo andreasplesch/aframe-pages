@@ -156,6 +156,7 @@ function parseVec3s (value) {
 }
 
 function parseVec2s (value) {
+  if (typeof value === 'object') {return value} // perhaps also check value.isArray
   var mc = value.match(/([+\-0-9eE\.]+)/g);
   var vecs = [];
   var vec = {};
