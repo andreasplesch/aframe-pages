@@ -186,17 +186,16 @@ function parseVec2s (value) {
 }
   
 function updateGeometry (g, data, dmaps, facesNeedUpdate) {
-  var geometry = g.clone();
+  var geometry = g;
   
-  geometry.vertices = data.vertices;
-  /*
-  data.vertices.forEach(function fillVertices (vec3) {
-    geometry.vertices.push(
-      new THREE.Vector3(vec3.x, vec3.y, vec3.z)
+  //geometry.vertices = data.vertices;
+  
+  data.vertices.forEach(function fillVertices (vec3, i) {
+    geometry.vertices[i].copy(vec3);
+      //new THREE.Vector3(vec3.x, vec3.y, vec3.z)
     );
   });
-  */
-  
+
   geometry.computeBoundingBox();
 
   if ( data.triangles.length == 0 ) {
