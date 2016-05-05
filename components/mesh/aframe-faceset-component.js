@@ -27,7 +27,7 @@ AFRAME.registerComponent('faceset', {
     triangles: {
       default: [],
       // Deserialize index in the form of any-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
-      parse: function (value) { return parseVec3s (value) } ,
+      parse: function (value) { return parseFace3s (value) } ,
       // Serialize array of vec3s in case someone does getAttribute('faceset', 'triangles', [...]).
       stringify: function (data) {
         return data.map(AFRAME.utils.coordinates.stringify).join(',');
