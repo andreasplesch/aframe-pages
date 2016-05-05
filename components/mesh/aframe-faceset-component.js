@@ -156,6 +156,18 @@ function parseVec3s (value) {
   return vecs;
 }
 
+function parseFace3s (value) {
+  if (typeof value === 'object') {return value} // perhaps also check value.isArray
+  var mc = value.match(/([+\-0-9eE\.]+)/g);
+  var vecs = [];
+  var vec = {};
+  for (var i=0, n=mc?mc.length:0; i<n; i+=3) {
+    vec = new THREE.Face3(+mc[i+0], +mc[i+1], +mc[i+2]);
+    vecs.push( vec );
+  }
+  return vecs;
+}
+
 function parseVec2s (value) {
   if (typeof value === 'object') {return value} // perhaps also check value.isArray
   var mc = value.match(/([+\-0-9eE\.]+)/g);
@@ -217,6 +229,7 @@ function getGeometry (data, dmaps) {
     );
   });
   */
+  
   return geometry
 }
 
