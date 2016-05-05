@@ -186,14 +186,15 @@ function parseVec2s (value) {
 }
   
 function updateGeometry (g, data, dmaps, facesNeedUpdate) {
-  var geometry = g;
+  var geometry = new THREE.geometry();
   
-  //geometry.vertices = data.vertices;
+  geometry.vertices = data.vertices;
+  /*
   geometry.vertices = [];
   data.vertices.forEach(function fillVertices (vec3, i) {
     geometry.vertices.push(  vec3  );
   } ) ;
-
+  */
   geometry.computeBoundingBox();
 
   if ( data.triangles.length == 0 ) {
