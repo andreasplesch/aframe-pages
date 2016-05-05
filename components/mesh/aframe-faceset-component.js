@@ -89,7 +89,7 @@ AFRAME.registerComponent('faceset', {
                           ( data.triangles.length !== g.faces.length ) ;
 
     if (geometryNeedsUpdate) {
-      updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
+      g = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
     }
     
     if (translateNeedsUpdate) {
@@ -133,7 +133,7 @@ AFRAME.registerComponent('faceset', {
     
     g.mergeVertices();
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
-    //g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
+    g.verticesNeedUpdate = true; //maybe not necessary nor new geometries
     g.uvsNeedUpdate = true;
     g.computeFaceNormals();
     g.computeVertexNormals();
