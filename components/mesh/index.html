@@ -56,10 +56,10 @@
   
   function genTriangles(n) {
     var tris = [];
-    for (var x = 0; x < n-1; x++) {
+    for (var x = 0; x < n*(n-1); x += n) {
       for (var y = 0; y < n-1; y++) {
-        tris.push([y*x, (y+1)*x, y*(x+1)].join(' '));
-        tris.push([(y+1)*x, (y+1)*(x+1), y*(x+1)].join(' '));
+        tris.push([y + x, y + 1 + x, y + x + n].join(' '));
+        tris.push([y + 1 + x, y + 1 + x + n, y + x + n].join(' '));
       }
     }
     return tris.join(' ')
