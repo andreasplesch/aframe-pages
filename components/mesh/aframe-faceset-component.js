@@ -95,7 +95,7 @@ AFRAME.registerComponent('faceset', {
     if (translateNeedsUpdate) {
       applyTranslate(g, data.translate, currentTranslate);
     }
-    
+    //TODO do not always update
     //uvs
     var uvs = data.uvs ;
     var fs = g.faces ;
