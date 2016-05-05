@@ -45,7 +45,7 @@
     var z;
     for (var x = 0; x < n; x++) {
       for (var y = 0; y < n; y++) {
-        z = Math.cos( x*xs + t/1000 + )*Math.cos( y*ys + t/1000);
+        z = Math.cos( x*xs + t/1000 ) * Math.cos( y*ys + t/1000);
         verts.push([x, z, y].join(' '));
       }
     }
