@@ -90,8 +90,8 @@ AFRAME.registerComponent('faceset', {
     var uvsNeedUpdate = 'uvs' in diff || facesNeedUpdate ;
 
     if (geometryNeedsUpdate) {
-      mesh.geometry = null;
-      g = mesh.geometry = updateGeometry(this.data, this.dmaps, facesNeedUpdate);
+      mesh.geometry = null; // hm, old geometry is not gc'ed
+      g = mesh.geometry = getGeometry(this.data, this.dmaps, facesNeedUpdate);
       g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
     }
     
@@ -191,7 +191,7 @@ function parseVec2s (value) {
   return vecs;
 }
   
-function updateGeometry (data, dmaps, facesNeedUpdate) {
+function getGeometry (data, dmaps, facesNeedUpdate) {
   var geometry = new THREE.Geometry();
   
   geometry.vertices = data.vertices;
