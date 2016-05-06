@@ -91,7 +91,10 @@ AFRAME.registerComponent('faceset', {
 
     if (geometryNeedsUpdate) {
       mesh.geometry.dispose(); // hm, old geometry is not gc'ed
-      g = mesh.geometry = getGeometry(this.data, this.dmaps, facesNeedUpdate);
+      mesh.geometry = null;
+      var mat = mesh.material;
+      g = getGeometry(this.data, this.dmaps, facesNeedUpdate);
+      mesh = new THREE.Mesh(g, mat);
       g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
     }
     
@@ -104,7 +107,6 @@ AFRAME.registerComponent('faceset', {
     if (uvsNeedUpdate) {
       g.faceVertexUvs[0] = [];
       var fs = g.faces ;
-      
       var _uvs = getUvs(data, g, this.dmaps)
       fs.forEach( function assignUVs(f, i) {
         g.faceVertexUvs[0].push( [ _uvs[f.a], _uvs[f.b], _uvs[f.c] ]) ;
