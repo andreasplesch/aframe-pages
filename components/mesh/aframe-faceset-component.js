@@ -85,8 +85,9 @@ AFRAME.registerComponent('faceset', {
     var g = mesh.geometry;
     var geometryNeedsUpdate = !( Object.keys(diff).length === 1 && ('translate' in diff || 'uvs' in diff) ); // also except uvs only diff
     var translateNeedsUpdate = !AFRAME.utils.deepEqual(data.translate, currentTranslate);
-    var facesNeedUpdate = ( data.vertices.length !== currentVertices.length ) || 
+    var facesNeedUpdate = ( data.vertices.length !== g.vertices.length ) || 
                           ( data.triangles.length !== g.faces.length ) ;
+    var uvsNeedUpdate = 'uvs' in diff || facesNeedUpdate ;
 
     if (geometryNeedsUpdate) {
       g = mesh.geometry = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
