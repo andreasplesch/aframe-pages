@@ -90,7 +90,7 @@ AFRAME.registerComponent('faceset', {
     var uvsNeedUpdate = 'uvs' in diff || facesNeedUpdate ;
 
     if (geometryNeedsUpdate) {
-      mesh.geometry = null; // hm, old geometry is not gc'ed
+      mesh.geometry.dispose(); // hm, old geometry is not gc'ed
       g = mesh.geometry = getGeometry(this.data, this.dmaps, facesNeedUpdate);
       g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
     }
