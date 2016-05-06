@@ -199,7 +199,7 @@ function parseVec2s (value) {
   }
   return vecs;
 }
-  
+
 function getGeometry (data, dmaps, facesNeedUpdate) {
   var geometry = new THREE.Geometry();
   
@@ -272,6 +272,39 @@ function ProjectionDirection (data, size) {
       // if size.y < size.x && size.y < size.z {xd='x',yd='z'}
     }
     return dir
+}
+
+function getUvs (data, g) {
+  var uvs = data.uvs ;
+  if ( uvs.length > 0 ) {
+    var uvsLength = +uvs.length ;
+    //fill in missing uvs if any
+    for (var i = uvsLength; i < g.vertices.length; i++) {
+      uvs.push(uvs[uvsLength].clone) ;
+    }
+    return uvs
+  }
+  //else {
+    //produce default uvs
+    var size = BboxSize(g);
+    var dir = ProjectionDirection(data, size);
+    var xd = this.dmaps.x[dir];
+    var yd = this.dmaps.y[dir];
+    var vs = g.vertices;
+    var bb = g.boundingBox ;
+    var xoffset = bb.min[xd];
+    var yoffset = bb.min[yd];
+    var tmpUvs = [];
+    vs.forEach( function computeUV(v) {
+      tmpUvs.push( new THREE.Vector2 (
+        (v[xd] - xoffset) / size[xd] ,
+        (v[yd] - yoffset) / size[yd] 
+        ));
+    });
+    fs.forEach( function assignUVs(f, i) {
+      g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
+    });
+    return tmpUvs 
 }
 
 /**
