@@ -95,7 +95,7 @@ AFRAME.registerComponent('faceset', {
       var mat = mesh.material;
       g = getGeometry(this.data, this.dmaps, facesNeedUpdate);
       mesh = new THREE.Mesh(g, mat);
-      this.el.Object3DMap.mesh = mesh;
+      this.el.object3DMap.mesh = mesh;
       g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
     }
     
