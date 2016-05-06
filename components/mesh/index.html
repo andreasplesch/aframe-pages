@@ -46,8 +46,8 @@ window.onload = function () {
   var ent = document.querySelector("#dyn");
   
   var n = 40;
-  var xs = (2+Math.random()*n/4)*Math.PI;
-  var ys = (2+Math.random()*n/4)*Math.PI;
+  var x_freq = (3+Math.random()*n/3)*Math.PI;
+  var y_freq = (3+Math.random()*n/3)*Math.PI;
   
   var verts = genSurface(performance.now());
   ent.setAttribute('faceset', 'vertices', verts);
@@ -79,7 +79,7 @@ window.onload = function () {
     var zz, xx, yy;
     for (var x = 0; x < 1; x += 1/n) {
       for (var y = 0; y < 1; y += 1/n) {
-        zz = Math.pow(Math.cos( x*xs + t/1000 ),2) + Math.cos( y*ys + Math.pow(Math.sin(t/1000), 2) );
+        zz = Math.pow(Math.cos( x*x_freq + t/1000 ),2) + Math.cos( y*y_freq + Math.pow(Math.sin(t/1000), 2) );
         yy = y + 0.5*Math.cos(y*ys + Math.pow(t/10000,2))/n;
         xx = x;
         verts.push(new THREE.Vector3(xx, zz, yy));
