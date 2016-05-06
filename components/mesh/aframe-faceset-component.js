@@ -105,7 +105,7 @@ AFRAME.registerComponent('faceset', {
       g.faceVertexUvs[0] = [];
       var fs = g.faces ;
       
-      var _uvs = getUvs(data)
+      var _uvs = getUvs(data, g)
       fs.forEach( function assignUVs(f, i) {
         g.faceVertexUvs[0].push( [ _uvs[f.a], _uvs[f.b], _uvs[f.c] ]) ;
       });
