@@ -80,7 +80,7 @@ window.onload = function () {
     for (var x = 0; x < 1; x += 1/n) {
       for (var y = 0; y < 1; y += 1/n) {
         zz = Math.pow(Math.cos( x*x_freq + t/1000 ), 2) + Math.cos( (y+0.25)*y_freq + Math.pow(Math.sin(t/1000), 2) );
-        yy = y + 0.5*Math.cos(y*y_freq/n + Math.pow(t/10000,1.5))/n;
+        yy = y + Math.cos(y*y_freq + Math.pow(t/10000,1.5))/n;
         xx = x;
         verts.push(new THREE.Vector3(xx, zz, yy));
       }
