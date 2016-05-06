@@ -224,7 +224,8 @@ function updateGeometry (g, data, dmaps, facesNeedUpdate) {
     return geometry
   }
   
-  if (facesNeedUpdate) { geometry.faces = data.triangles; } ;
+  //if (facesNeedUpdate) { geometry.faces = data.triangles; } ;
+  geometry.faces = data.triangles;
   /*
   data.triangles.forEach(function fillFaces (facet) {
     geometry.faces.push(
