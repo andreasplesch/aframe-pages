@@ -105,7 +105,7 @@ AFRAME.registerComponent('faceset', {
       g.faceVertexUvs[0] = [];
       var fs = g.faces ;
       
-      var _uvs = getUvs(data, g)
+      var _uvs = getUvs(data, g, this.dmaps)
       fs.forEach( function assignUVs(f, i) {
         g.faceVertexUvs[0].push( [ _uvs[f.a], _uvs[f.b], _uvs[f.c] ]) ;
       });
@@ -277,7 +277,7 @@ function ProjectionDirection (data, size) {
     return dir
 }
 
-function getUvs (data, g) {
+function getUvs (data, g, dmaps) {
   var uvs = data.uvs ;
   if ( uvs.length > 0 ) {
     var uvsLength = +uvs.length ;
@@ -291,8 +291,8 @@ function getUvs (data, g) {
     //produce default uvs
     var size = BboxSize(g);
     var dir = ProjectionDirection(data, size);
-    var xd = this.dmaps.x[dir];
-    var yd = this.dmaps.y[dir];
+    var xd = dmaps.x[dir];
+    var yd = dmaps.y[dir];
     var vs = g.vertices;
     var bb = g.boundingBox ;
     var xoffset = bb.min[xd];
