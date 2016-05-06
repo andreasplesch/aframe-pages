@@ -93,9 +93,6 @@ AFRAME.registerComponent('faceset', {
       mesh.geometry = null;
       g = mesh.geometry = updateGeometry(this.data, this.dmaps, facesNeedUpdate);
       g.verticesNeedUpdate = true; // issue #7179, does not work, will need replace vertices
-      g.computeFaceNormals();
-      g.computeVertexNormals();
-    
     }
     
     if (translateNeedsUpdate) {
@@ -142,6 +139,9 @@ AFRAME.registerComponent('faceset', {
     }
     
     g.mergeVertices();
+    g.computeFaceNormals();
+    g.computeVertexNormals();
+    
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
     //g.computeBoundingSphere();
     
