@@ -304,9 +304,7 @@ function getUvs (data, g, dmaps) {
         (v[yd] - yoffset) / size[yd] 
         ));
     });
-    fs.forEach( function assignUVs(f, i) {
-      g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
-    });
+    
     return tmpUvs 
 }
 
