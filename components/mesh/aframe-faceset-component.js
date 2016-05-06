@@ -104,12 +104,13 @@ AFRAME.registerComponent('faceset', {
     if (uvsNeedUpdate) {
       g.faceVertexUvs[0] = [];
       var fs = g.faces ;
-      /*
+      
       var _uvs = getUvs(data)
       fs.forEach( function assignUVs(f, i) {
         g.faceVertexUvs[0].push( [ _uvs[f.a], _uvs[f.b], _uvs[f.c] ]) ;
       });
-      */
+      
+      /*
       
       
       var uvs = data.uvs ;
@@ -144,6 +145,8 @@ AFRAME.registerComponent('faceset', {
           g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
         });
       }
+      */
+      
       g.uvsNeedUpdate = true;
     }
     
