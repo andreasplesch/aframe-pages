@@ -102,8 +102,17 @@ AFRAME.registerComponent('faceset', {
     //uvs
     
     if (uvsNeedUpdate) {
-      var uvs = data.uvs ;
+      g.faceVertexUvs[0] = [];
       var fs = g.faces ;
+      /*
+      var _uvs = getUvs(data)
+      fs.forEach( function assignUVs(f, i) {
+        g.faceVertexUvs[0].push( [ _uvs[f.a], _uvs[f.b], _uvs[f.c] ]) ;
+      });
+      */
+      
+      
+      var uvs = data.uvs ;
       if ( uvs.length > 0 ) {
         var uvsLength = +uvs.length ;
         //fill in missing uvs if any
