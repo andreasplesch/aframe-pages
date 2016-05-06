@@ -90,7 +90,8 @@ AFRAME.registerComponent('faceset', {
     var uvsNeedUpdate = 'uvs' in diff || facesNeedUpdate ;
 
     if (geometryNeedsUpdate) {
-      g = mesh.geometry = updateGeometry(g, this.data, this.dmaps, facesNeedUpdate);
+      mesh.geometry = null;
+      g = mesh.geometry = updateGeometry(this.data, this.dmaps, facesNeedUpdate);
     }
     
     if (translateNeedsUpdate) {
@@ -98,39 +99,42 @@ AFRAME.registerComponent('faceset', {
     }
     //TODO do not always update
     //uvs
-    var uvs = data.uvs ;
-    var fs = g.faces ;
-    if ( uvs.length > 0 ) {
-      var uvsLength = +uvs.length ;
-      //fill in missing uvs if any
-      for (var i = uvsLength; i < g.vertices.length; i++) {
-        uvs.push(uvs[uvsLength].clone) ;
+    
+    if (uvsNeedUpdate) {
+      var uvs = data.uvs ;
+      var fs = g.faces ;
+      if ( uvs.length > 0 ) {
+        var uvsLength = +uvs.length ;
+        //fill in missing uvs if any
+        for (var i = uvsLength; i < g.vertices.length; i++) {
+          uvs.push(uvs[uvsLength].clone) ;
+        }
+        for (var i=0; i < fs.length; i++) {
+          g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
+        }
       }
-      for (var i=0; i < fs.length; i++) {
-        g.faceVertexUvs[0].push( [ uvs[fs[i].a], uvs[fs[i].b], uvs[fs[i].c] ]) ;
+      else {
+        //produce default uvs
+        var size = BboxSize(g);
+        var dir = ProjectionDirection(data, size);
+        var xd = this.dmaps.x[dir];
+        var yd = this.dmaps.y[dir];
+        var vs = g.vertices;
+        var bb = g.boundingBox ;
+        var xoffset = bb.min[xd];
+        var yoffset = bb.min[yd];
+        var tmpUvs = [];
+        vs.forEach( function computeUV(v) {
+          tmpUvs.push( new THREE.Vector2 (
+            (v[xd] - xoffset) / size[xd] ,
+            (v[yd] - yoffset) / size[yd] 
+            ));
+        });
+        fs.forEach( function assignUVs(f, i) {
+          g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
+        });
       }
-    }
-    else {
-      //produce default uvs
-      var size = BboxSize(g);
-      var dir = ProjectionDirection(data, size);
-      var xd = this.dmaps.x[dir];
-      var yd = this.dmaps.y[dir];
-      var vs = g.vertices;
-      var bb = g.boundingBox ;
-      var xoffset = bb.min[xd];
-      var yoffset = bb.min[yd];
-      var tmpUvs = [];
-      vs.forEach( function computeUV(v) {
-        tmpUvs.push( new THREE.Vector2 (
-          (v[xd] - xoffset) / size[xd] ,
-          (v[yd] - yoffset) / size[yd] 
-          ));
-      });
-      fs.forEach( function assignUVs(f, i) {
-        g.faceVertexUvs[0].push( [ tmpUvs[f.a], tmpUvs[f.b], tmpUvs[f.c] ]) ;
-      });
-    }
+    )
     
     g.mergeVertices();
     if (data.crease) { mesh.material.shading = THREE.FlatShading; }; // make optional for faceted shading
@@ -186,7 +190,7 @@ function parseVec2s (value) {
   return vecs;
 }
   
-function updateGeometry (g, data, dmaps, facesNeedUpdate) {
+function updateGeometry (data, dmaps, facesNeedUpdate) {
   var geometry = new THREE.Geometry();
   
   geometry.vertices = data.vertices;
