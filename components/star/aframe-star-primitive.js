@@ -7,7 +7,7 @@ AFRAME.registerPrimitive('a-polygon', AFRAME.utils.extendDeep({}, getMeshMixin()
 	{
   defaultAttributes: {
     faceset: {
-      vertices: '1 0 0, -0.5 0 0.866, -0.5 0 -0.866',
+      vertices: '0 0 0, 1 0 0, -0.5 0 0.866, -0.5 0 -0.866',
       triangles: ''
     }
   },
