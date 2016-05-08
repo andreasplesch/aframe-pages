@@ -51,7 +51,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 				//inner polygon, clockwise
 				faces.push( [2*p+2, 0, (2*p+4)%(points*2)].join(" ") );
 				//outer points
-				faces.push( [2*p+2, (2*p+4)%(points*2), 2*p+1].join(" ") );
+				faces.push( [2*p+2, (2*p+4)%(points*2), (2*p+3)%(points*2)].join(" ") );
 			}
 			return faces.join(",");
 		}
