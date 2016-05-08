@@ -41,3 +41,34 @@ AFRAME.registerPrimitive('a-polygon', AFRAME.utils.extendDeep({}, getMeshMixin()
   }
   
 }));
+/**
+ * Common mesh defaults, mappings, and transforms.
+ */
+ function getMeshMixin () {
+  return {
+    defaultAttributes: {
+      material: { }
+    },
+
+    mappings: {
+      color: 'material.color',
+      metalness: 'material.metalness',
+      opacity: 'material.opacity',
+      repeat: 'material.repeat',
+      roughness: 'material.roughness',
+      shader: 'material.shader',
+      side: 'material.side',
+      src: 'material.src',
+      transparent: 'material.transparent'
+    },
+
+    transforms: {
+      src: function (value) {
+        // Selector.
+        if (value[0] === '#') { return value; }
+        // Inline url().
+        return 'url(' + value + ')';
+      }
+    }
+  };
+};
