@@ -47,11 +47,11 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 			//triangles
 			var faces = [];
 			var points = this.getAttribute('points');
-			for ( var p = 1; p < points; p++) {
-				//inner polygon
-				faces.push( [0, 2*p, 2*p+2].join(" ") );
+			for ( var p = 0; p < points; p++) {
+				//inner polygon, clockwise
+				faces.push( [2*p+2, 0, (2*p+4)%points].join(" ") );
 				//outer points
-				faces.push( [2*p, 2*p+1, 2*p+2].join(" ") );
+				faces.push( [2*p+2, (2*p+4)%points, 2*p+1].join(" ") );
 			}
 			return faces.join(",");
 		}
