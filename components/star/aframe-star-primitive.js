@@ -10,7 +10,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
       vertices: '0 0 0, 1 0 0, -0.5 0 0.866, -0.5 0 -0.866',
       triangles: ''
     },
-    radius: "0.5" ,
+    radius: "0.3" ,
   },
 
   mappings: {
@@ -21,7 +21,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
   transforms: {
 		points: function(points) {
 			var vts = [ "0 0 0" ]; // add center point
-			var r = 0.5;
+			var r = this.getAttribute('radius');
 			points = Math.max(3, points);
 			var step = 2 * Math.PI/points;
 			for (var a = 0; a < 2 * Math.PI; a += step) {
