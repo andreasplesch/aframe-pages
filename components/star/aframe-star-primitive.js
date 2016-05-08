@@ -1,7 +1,7 @@
 if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.');
 }
-var getMeshMixin = require('./getMeshMixin');
+//var getMeshMixin = require('./getMeshMixin');
 
 AFRAME.registerPrimitive('a-polygon', AFRAME.utils.extendDeep({}, getMeshMixin(), 
 	{
