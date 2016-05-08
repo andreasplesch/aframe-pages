@@ -9,7 +9,8 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
     faceset: {
       vertices: '0 0 0, 1 0 0, -0.5 0 0.866, -0.5 0 -0.866',
       triangles: ''
-    }
+    },
+    radius: "0.5" ,
   },
 
   mappings: {
