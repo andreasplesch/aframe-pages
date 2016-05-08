@@ -7,8 +7,9 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 	{
   defaultAttributes: {
     faceset: {
-      vertices: '0 0 0, 1 0 0, -0.5 0 0.866, -0.5 0 -0.866',
-      triangles: ''
+      vertices: "0 0 0, 1 0 0, 0.2427050983124842 0 0.17633557568774194, 0.30901699437494745 0 0.9510565162951535, -0.0927050983124842 0 0.2853169548885461, -0.8090169943749473 0 0.5877852522924732, -0.3 0 3.6739403974420595e-17, -0.8090169943749476 0 -0.587785252292473, -0.09270509831248426 0 -0.285316954888546, 0.30901699437494723 0 -0.9510565162951536, 0.24270509831248419 0 -0.176335575687742"
+,
+      triangles: "2 0 4, 2 4 3, 4 0 6, 4 6 5, 6 0 2, 6 2 1"
     },
     radius: "0.3" ,
   },
@@ -21,7 +22,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
   transforms: {
 		points: function(points) {
 			var vts = [ "0 0 0" ]; // add center point
-			var r = parseFloat(this.getAttribute('radius'));
+			var r = this.getAttribute('radius');
 			points = Math.max(3, points);
 			var step = 2 * Math.PI/points;
 			for (var a = 0; a < 2 * Math.PI; a += step) {
