@@ -21,7 +21,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
   transforms: {
 		points: function(points) {
 			var vts = [ "0 0 0" ]; // add center point
-			var r = this.getAttribute('radius');
+			var r = parseFloat(this.getAttribute('radius'));
 			points = Math.max(3, points);
 			var step = 2 * Math.PI/points;
 			for (var a = 0; a < 2 * Math.PI; a += step) {
