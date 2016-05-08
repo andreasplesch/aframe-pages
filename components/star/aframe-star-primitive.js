@@ -14,6 +14,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 
   mappings: {
     points: 'faceset.vertices',
+    radius: 'faceset.triangles'
   },
   
   transforms: {
@@ -27,6 +28,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 				//inner points
 				vts.push( [ r*Math.cos(a+step/2), 0 , r*Math.sin(a+step/2) ].join(" ") );
 			}
+			/*
 			//triangles
 			var faces = [];
 			for ( var p = 1; p < points; p++) {
@@ -37,7 +39,20 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 			}
 			//this.components.faceset.data.triangles = faces.join(',');
 			this.setAttribute('faceset', 'triangles', faces.join(','));  //works but vertices are not set yet
+			*/
 			return vts.join(",");
+		},
+		radius: function(radius) {
+			//triangles
+			var faces = [];
+			var points = this.getAttribute('points');
+			for ( var p = 1; p < points; p++) {
+				//inner polygon
+				faces.push( [0, 2*p, 2*p+2].join(" ") );
+				//outer points
+				faces.push( [2*p, 2*p+1, 2*p+2].join(" ") );
+			}
+			return faces.join(",");
 		}
   }
   
