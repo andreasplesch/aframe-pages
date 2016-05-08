@@ -36,7 +36,7 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 				faces.push( [2*p, 2*p+1, 2*p+2].join(" ") );
 			}
 			//this.components.faceset.data.triangles = faces.join(',');
-			this.setAttribute('faceset', 'triangles', faces.join(','));
+			this.setAttribute('faceset', 'triangles', faces.join(','));  //works but vertices are not set yet
 			return vts.join(",");
 		}
   }
