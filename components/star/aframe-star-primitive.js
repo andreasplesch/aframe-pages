@@ -35,7 +35,8 @@ AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(),
 				//outer points
 				faces.push( [2*p, 2*p+1, 2*p+2].join(" ") );
 			}
-			this.components.faceset.data.triangles = faces.join(',');
+			//this.components.faceset.data.triangles = faces.join(',');
+			this.setAttribute('faceset', 'triangles', faces.join(','));
 			return vts.join(",");
 		}
   }
