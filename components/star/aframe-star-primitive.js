@@ -3,7 +3,7 @@ if (typeof AFRAME === 'undefined') {
 }
 //var getMeshMixin = require('./getMeshMixin');
 
-AFRAME.registerPrimitive('a-polygon', AFRAME.utils.extendDeep({}, getMeshMixin(), 
+AFRAME.registerPrimitive('a-star', AFRAME.utils.extendDeep({}, getMeshMixin(), 
 	{
   defaultAttributes: {
     faceset: {
