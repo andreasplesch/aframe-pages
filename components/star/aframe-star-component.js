@@ -24,8 +24,21 @@ AFRAME.registerComponent('star', {
    * Generally modifies the entity based on the data.
    */
   update: function (oldData) {
-  
-    this.el.setAttribute('faceset','vertices','0 0 0, 1 1 0, 1 0 0');
+    var el = this.el;
+    var data = this.data;
+    var points = this.points;
+    var r = this.radius;
+    
+    //vertices
+    var vts = [ "0 0 0" ]; // add center point
+		points = Math.max(3, points);
+		var step = 2 * Math.PI/points;
+		for (var a = 0; a < 2 * Math.PI; a += step) {
+			vts.push( [ Math.cos(a), 0 , Math.sin(a) ].join(" ") );
+			//inner points
+			vts.push( [ r*Math.cos(a+step/2), 0 , r*Math.sin(a+step/2) ].join(" ") );
+		}
+    el.setAttribute('faceset','vertices',vts.join(", "));
   
   },
 
