@@ -41,7 +41,6 @@ AFRAME.registerComponent('star', {
     el.setAttribute('faceset','vertices', vts.join(", "));
     //faces
 	  var faces = [];
-		var points = this.getAttribute('points');
 		for ( var p = 0; p < points; p++) {
 			//inner polygon, clockwise
 			faces.push( [1+(p*2+1)%(points*2), 0, 1+(2*p+3)%(points*2)].join(" ") );
