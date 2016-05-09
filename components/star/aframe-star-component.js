@@ -26,8 +26,8 @@ AFRAME.registerComponent('star', {
   update: function (oldData) {
     var el = this.el;
     var data = this.data;
-    var points = this.points;
-    var r = this.radius;
+    var points = data.points;
+    var r = data.radius;
     
     //vertices
     var vts = [ "0 0 0" ]; // add center point
@@ -38,7 +38,7 @@ AFRAME.registerComponent('star', {
 			//inner points
 			vts.push( [ r*Math.cos(a+step/2), 0 , r*Math.sin(a+step/2) ].join(" ") );
 		}
-    el.setAttribute('faceset','vertices',vts.join(", "));
+    el.setAttribute('faceset','vertices', vts.join(", "));
   
   },
 
