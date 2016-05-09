@@ -25,7 +25,7 @@ AFRAME.registerComponent('star', {
    */
   update: function (oldData) {
   
-    this.el.setAttribute('faceset','vertices','0 0 0, 1 0 0, 1 1 0');
+    this.el.setAttribute('faceset','vertices','0 0 0, 1 1 0, 1 0 0');
   
   },
 
