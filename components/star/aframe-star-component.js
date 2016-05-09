@@ -15,8 +15,7 @@ AFRAME.registerComponent('star', {
    * Called once when component is attached. Generally for initial setup.
    */
   init: function () {
-    var fs = document.createAttribute("faceset");
-    this.el.setAttributeNode(fs);
+    this.el.setAttribute('faceset');
   
   },
 
